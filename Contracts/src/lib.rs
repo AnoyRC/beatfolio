@@ -1,4 +1,5 @@
 use anchor_lang::prelude::*;
+use anchor_lang::solana_program::entrypoint::ProgramResult;
 
 declare_id!("7RHSYqcQQiVksPx6Wgw5zW5JXERSwBnNgpVQEg9afmi1");
 
@@ -40,6 +41,38 @@ pub mod beat_folio{
         let song_post = &mut ctx.accounts.song_post;
         song_post.status = _status;
 
+        Ok(())
+    }
+
+    pub fn donate(ctx: Context<Donate>, _amount: u64) -> Result<()>{
+        let ix = anchor_lang::solana_program::system_instruction::transfer(
+            &ctx.accounts.authority.key(),
+            &ctx.accounts.song_post.key(),
+            _amount,
+        );
+        anchor_lang::solana_program::program::invoke(
+            &ix,
+            &[
+                ctx.accounts.authority.to_account_info(),
+                ctx.accounts.song_post.to_account_info(),
+            ],
+        );
+
+        Ok(())
+    }
+
+    pub fn withdraw(ctx: Context<Withdraw>, _amount: u64) -> ProgramResult{
+        let song_post = &mut ctx.accounts.song_post;
+        let authority = &mut ctx.accounts.authority;
+        if song_post.authority != *authority.key {
+            return Err(ProgramError::IncorrectProgramId);
+        }
+        let rent_balance = Rent::get()?.minimum_balance(song_post.to_account_info().data_len());
+        if **song_post.to_account_info().lamports.borrow() - rent_balance < _amount{
+            return Err(ProgramError::InsufficientFunds);
+        }
+        **song_post.to_account_info().try_borrow_mut_lamports()? -= _amount;
+        **authority.to_account_info().try_borrow_mut_lamports()? += _amount;
         Ok(())
     }
 }
@@ -104,4 +137,34 @@ pub struct EditStatus<'info>{
     pub song_post : Box<Account<'info, Song>>,
 
     pub system_program : Program<'info, System>
+}
+
+#[derive(Accounts)]
+#[instruction(song_idx : u8)]
+pub struct Donate<'info>{
+    #[account(mut)]
+    pub authority : Signer<'info>,
+
+    #[account(mut,
+             seeds=[SONG_TAG, authority.key().as_ref(), &[song_idx].as_ref()],
+             bump,
+             has_one=authority
+             )]
+    pub song_post : Box<Account<'info, Song>>,
+
+    pub system_program : Program<'info, System>
+}
+
+#[derive(Accounts)]
+#[instruction(song_idx : u8)]
+pub struct Withdraw<'info>{
+    #[account(mut)]
+    pub authority : Signer<'info>,
+
+    #[account(mut,
+             seeds=[SONG_TAG, authority.key().as_ref(), &[song_idx].as_ref()],
+             bump,
+             has_one=authority
+             )]
+    pub song_post : Box<Account<'info, Song>>,
 }
