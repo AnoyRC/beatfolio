@@ -1,5 +1,5 @@
 const Nav = () => {
-  return <div>Nav</div>;
+  return <nav className="w-20 h-screen"></nav>;
 };
 
 export default Nav;
