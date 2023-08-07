@@ -1,3 +1,12 @@
+import { MusicPlayer, ModalMusicPlayer } from '@/components/MusicPlayer';
+import Nav from '@/components/navigation/Nav';
+
 export default function Home() {
-  return <main>Hi</main>;
+  return (
+    <main className="h-screen flex max-w-7xl">
+      <Nav />
+      {/* <MusicPlayer /> */}
+      <ModalMusicPlayer />
+    </main>
+  );
 }

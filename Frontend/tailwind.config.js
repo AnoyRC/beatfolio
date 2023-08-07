@@ -8,7 +8,20 @@ module.exports = withMT({
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        like: {
+          '75%, 100%': {
+            transform: 'scale(2)',
+            opacity: 0,
+          },
+        },
+      },
+
+      animation: {
+        like: 'like 1s ease-in-out 1',
+      },
+    },
   },
   plugins: [],
 });
