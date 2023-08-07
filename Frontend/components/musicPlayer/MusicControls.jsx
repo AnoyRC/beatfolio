@@ -23,7 +23,7 @@ const MusicControls = ({ endTime, maxWidth }) => {
     <div className="flex flex-1">
       {isLiked ? (
         <Image
-          src="/music-player/red-like.svg"
+          src="/common/red-like.svg"
           className="cursor-pointer"
           width={28}
           height={28}
@@ -32,7 +32,7 @@ const MusicControls = ({ endTime, maxWidth }) => {
         />
       ) : (
         <Image
-          src="/music-player/like.svg"
+          src="/common/like.svg"
           className="cursor-pointer"
           width={28}
           height={28}
