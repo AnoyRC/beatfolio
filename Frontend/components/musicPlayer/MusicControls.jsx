@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import MusicProgressBar from './MusicProgressBar';
+import PlayerMenu from './PlayerMenu';
 
 const MusicControls = ({ endTime, maxWidth }) => {
   const [isLiked, setIsLiked] = useState(true);
@@ -9,14 +11,6 @@ const MusicControls = ({ endTime, maxWidth }) => {
 
   const toggleLike = () => {
     setIsLiked((prev) => !prev);
-  };
-
-  const onVolumeClick = () => {
-    console.log('onVolumeClick');
-  };
-
-  const onMenuClick = () => {
-    console.log('onMenuClick');
   };
 
   return (
@@ -41,43 +35,9 @@ const MusicControls = ({ endTime, maxWidth }) => {
         />
       )}
 
-      <div className="flex items-center w-full mx-10">
-        <p className="text-gray-700">0:00</p>
+      <MusicProgressBar endTime={endTime} maxWidth={maxWidth} />
 
-        <div
-          className={`h-[5px] w-full rounded-full overflow-hidden relative mx-3 ${
-            maxWidth ? maxWidth : ''
-          }`}
-        >
-          <div className={`bg-gray-700 w-full h-full`}></div>
-          <div
-            style={{ width: '100px' }}
-            className="h-full bg-white z-10 rounded-full absolute top-0 left-0"
-          ></div>
-        </div>
-
-        <p className="text-gray-700">{endTime ? endTime : '4:00'}</p>
-      </div>
-
-      <div className="flex">
-        <Image
-          src="/music-player/volume.svg"
-          width={28}
-          height={28}
-          className="cursor-pointer mr-6"
-          onClick={onVolumeClick}
-          alt="volume button"
-        />
-
-        <Image
-          src="/music-player/menu.svg"
-          width={28}
-          height={28}
-          className="cursor-pointer"
-          onClick={onMenuClick}
-          alt="menu button"
-        />
-      </div>
+      <PlayerMenu />
     </div>
   );
 };
