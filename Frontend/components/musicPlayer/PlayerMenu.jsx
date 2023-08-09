@@ -19,12 +19,15 @@ const PlayerMenu = () => {
     console.log(volume);
   };
 
-  const onMenuClick = () => {
-    console.log('onMenuClick');
-  };
-
   return (
     <div className="flex">
+      {showVolume && (
+        <div
+          className="h-screen w-screen fixed -bottom-12 left-0"
+          onClick={() => setShowVolume((prev) => !prev)}
+        ></div>
+      )}
+
       <div className="relative">
         <Image
           src="/music-player/volume.svg"
@@ -61,7 +64,7 @@ const PlayerMenu = () => {
             src="/music-player/menu.svg"
             width={28}
             height={28}
-            className="cursor-pointer"
+            className="cursor-pointer ml-6"
             alt="menu button"
           />
         </MenuHandler>

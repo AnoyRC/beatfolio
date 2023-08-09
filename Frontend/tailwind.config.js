@@ -36,6 +36,12 @@ module.exports = withMT({
           'scrollbar-width': 'none',
         },
 
+        '.prevent-select': {
+          '-webkit-user-select': 'none',
+          '-ms-user-select': 'none',
+          'user-select': 'none',
+        },
+
         '.text-gradiant': {
           background: 'linear-gradient(42deg, #2418CB 0%, #FA465D 100%)',
           'background-clip': 'text',

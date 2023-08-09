@@ -14,7 +14,7 @@ const MusicPlayer = () => {
 
 const ModalMusicPlayer = () => {
   return (
-    <section className="flex flex-1 items-center px-7 w-full max-w-[1096px] rounded-2xl backdrop-blur-sm bg-[rgba(28, 28, 28, 0.50)]">
+    <section className="flex flex-1 items-center px-7 py-3 w-full max-w-[1096px] rounded-2xl backdrop-blur-sm bg-gray-900/50 mx-auto">
       <PlaybackControls margin="mx-4" />
       <MusicDetails songPhoto="" songName="" singerName="" />
       <MusicControls endTime="" />
