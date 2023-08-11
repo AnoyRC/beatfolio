@@ -71,7 +71,7 @@ const PlayerMenu = () => {
 
         <MenuList className="bg-gray-900">
           <MenuItem className="flex items-center justify-between text-white hover:bg-gray-50/5 hover:text-white hover:font-bold">
-            Donate{' '}
+            Donate
             <Image
               src="/music-player/donate.svg"
               width={20}
@@ -81,7 +81,12 @@ const PlayerMenu = () => {
           </MenuItem>
 
           <MenuItem className="flex items-center justify-between text-white hover:bg-gray-50/5 hover:text-white hover:font-bold">
-            Add to Playlist{' '}
+            Listen Later
+            <Image src="/nav/listen-later.svg" width={20} height={20} alt="" />
+          </MenuItem>
+
+          <MenuItem className="flex items-center justify-between text-white hover:bg-gray-50/5 hover:text-white hover:font-bold">
+            Add to Playlist
             <Image
               src="/music-player/add-playlist.svg"
               width={20}

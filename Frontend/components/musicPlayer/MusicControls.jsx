@@ -6,7 +6,7 @@ import MusicProgressBar from './MusicProgressBar';
 import PlayerMenu from './PlayerMenu';
 
 const MusicControls = ({ endTime, maxWidth }) => {
-  const [isLiked, setIsLiked] = useState(true);
+  const [isLiked, setIsLiked] = useState(false);
   const [isInPlaylist, setIsInPlaylist] = useState(false);
 
   const toggleLike = () => {

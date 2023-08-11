@@ -4,11 +4,14 @@ import Nav from '@/components/navigation/Nav';
 
 export default function Home() {
   return (
-    <main className="h-screen flex max-w-7xl relative">
+    <main className="h-screen flex max-w-7xl relative mx-auto">
       <Nav />
-      {/* <MusicPlayer /> */}
-      {/* <ModalMusicPlayer /> */}
-      {/* <MusicModal /> */}
+
+      <section className="w-full">
+        {/* <MusicPlayer /> */}
+        {/* <ModalMusicPlayer /> */}
+        <MusicModal />
+      </section>
     </main>
-  );
+  )
 }

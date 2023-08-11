@@ -1,3 +1,9 @@
+import FeedGrid from '@/components/FeedGrid';
+
 export default function Home() {
-  return <main>Feeds</main>;
+  return (
+    <section>
+      <FeedGrid />
+    </section>
+  );
 }

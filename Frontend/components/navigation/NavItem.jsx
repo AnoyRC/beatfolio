@@ -7,7 +7,7 @@ import { Tooltip } from '@material-tailwind/react';
 
 const NavItem = ({ content, href, src, alt }) => {
   return (
-    <Link href={href}>
+    <Link href={href} className="relative z-50 prevent-select">
       <Tooltip
         content={content}
         placement="right"
@@ -15,7 +15,7 @@ const NavItem = ({ content, href, src, alt }) => {
           mount: { scale: 1, x: 10 },
           unmount: { scale: 0, x: -32 },
         }}
-        className="border border-gray-300 px-4 py-2 font-bold text-gradiant"
+        className="border border-gray-300 px-4 py-2 font-bold text-gradiant relative z-50"
       >
         <Image src={src} alt={alt} width={24} height={24} />
       </Tooltip>

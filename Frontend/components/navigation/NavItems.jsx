@@ -5,22 +5,37 @@ const NavItems = () => {
     <div className="w-full">
       <ul className="w-fit mx-auto">
         <li className="my-3 p-1.5 rounded-md hover:bg-gray-50/5">
-          <NavItem content="Home" href="/" src="nav/home.svg" alt="home" />
+          <NavItem
+            content="Home"
+            href="/users/home"
+            src="/nav/home.svg"
+            alt="home"
+          />
         </li>
 
         <li className="my-3 p-1.5 rounded-md hover:bg-gray-50/5">
-          <NavItem content="Feeds" href="/" src="nav/feeds.svg" alt="feeds" />
+          <NavItem
+            content="Feeds"
+            href="/feeds"
+            src="/nav/feeds.svg"
+            alt="feeds"
+          />
         </li>
 
         <li className="my-3 p-1.5 rounded-md hover:bg-gray-50/5">
-          <NavItem content="Albums" href="/" src="nav/album.svg" alt="albums" />
+          <NavItem
+            content="Albums"
+            href="/albums"
+            src="/nav/album.svg"
+            alt="albums"
+          />
         </li>
 
         <li className="my-3 p-1.5 rounded-md hover:bg-gray-50/5">
           <NavItem
             content="Artists"
-            href="/"
-            src="nav/artists.svg"
+            href="/artists"
+            src="/nav/artists.svg"
             alt="artists"
           />
         </li>
@@ -32,8 +47,8 @@ const NavItems = () => {
         <li className="my-3 p-1.5 rounded-md hover:bg-gray-50/5">
           <NavItem
             content="Favorites"
-            href="/"
-            src="common/like.svg"
+            href="/users/favorites"
+            src="/common/like.svg"
             alt="favorites"
           />
         </li>
@@ -41,8 +56,8 @@ const NavItems = () => {
         <li className="my-3 p-1.5 rounded-md hover:bg-gray-50/5">
           <NavItem
             content="Listen Later"
-            href="/"
-            src="nav/listen-later.svg"
+            href="/users/listen-later"
+            src="/nav/listen-later.svg"
             alt="listen later"
           />
         </li>
@@ -50,8 +65,8 @@ const NavItems = () => {
         <li className="my-3 p-1.5 rounded-md hover:bg-gray-50/5">
           <NavItem
             content="Playlists"
-            href="/"
-            src="nav/playlists.svg"
+            href="/users/playlists"
+            src="/nav/playlists.svg"
             alt="playlists"
           />
         </li>
