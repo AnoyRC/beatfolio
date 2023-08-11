@@ -19,7 +19,7 @@ const MusicModal = ({ songName, singerName, photo }) => {
           </div>
 
           <Image
-            src="/song-photos/random-1.png"
+            src="/song-photos/song-photo-1.png"
             width={320}
             height={320}
             alt="Song profile"

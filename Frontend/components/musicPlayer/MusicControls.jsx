@@ -1,43 +1,30 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 import MusicProgressBar from './MusicProgressBar';
 import PlayerMenu from './PlayerMenu';
+import Like from '../ui/Like';
+import Volume from './Volume';
 
-const MusicControls = ({ endTime, maxWidth }) => {
-  const [isLiked, setIsLiked] = useState(true);
+const MusicControls = ({ isLiked, endTime, maxWidth }) => {
   const [isInPlaylist, setIsInPlaylist] = useState(false);
-
-  const toggleLike = () => {
-    setIsLiked((prev) => !prev);
-  };
 
   return (
     <div className="flex flex-1">
-      {isLiked ? (
-        <Image
-          src="/common/red-like.svg"
-          className="cursor-pointer"
-          width={28}
-          height={28}
-          onClick={toggleLike}
-          alt="like button"
-        />
-      ) : (
-        <Image
-          src="/common/like.svg"
-          className="cursor-pointer"
-          width={28}
-          height={28}
-          onClick={toggleLike}
-          alt="like button"
-        />
-      )}
+      <Like liked={isLiked} />
 
       <MusicProgressBar endTime={endTime} maxWidth={maxWidth} />
 
-      <PlayerMenu />
+      <div className="flex">
+        <Volume />
+        <PlayerMenu
+          placement="top-end"
+          animate={{
+            mount: { scale: 1, y: 0, x: 0 },
+            unmount: { scale: 0, y: 160, x: 80 },
+          }}
+        />
+      </div>
     </div>
   );
 };

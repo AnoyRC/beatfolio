@@ -4,10 +4,6 @@ export const metadata = {
     'A decentralized social media platform tailored exclusively for artists, musicians, and creators.',
 };
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+export default function ProfileLayout({ children }) {
+  return <section>{children}</section>;
 }

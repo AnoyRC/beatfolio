@@ -5,11 +5,22 @@ import NavItems from './NavItems';
 const Nav = () => {
   return (
     <nav className="w-20 h-screen flex justify-between items-center flex-col py-8">
-      <Image src="/logo-sm.svg" alt="logo" width={40} height={40} />
+      <Image
+        src="/logo-sm.svg"
+        alt="Beatfolio logo"
+        width={40}
+        height={40}
+        className="prevent-select"
+      />
 
       <NavItems />
 
-      <NavItem content="Setting" href="/" src="nav/setting.svg" alt="setting" />
+      <NavItem
+        content="Setting"
+        href="/users/setting"
+        src="/nav/setting.svg"
+        alt="setting"
+      />
     </nav>
   );
 };

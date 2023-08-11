@@ -7,7 +7,7 @@ const MusicPlayer = () => {
     <section className="flex flex-1 items-center px-6 absolute right-0 bottom-0 w-full max-w-[1200px]">
       <PlaybackControls margin="mx-5" />
       <MusicDetails songPhoto="" songName="" singerName="" />
-      <MusicControls endTime="" />
+      <MusicControls isLiked="" endTime="" />
     </section>
   );
 };

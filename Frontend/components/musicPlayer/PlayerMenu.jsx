@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
 
 import {
   Menu,
@@ -10,88 +9,41 @@ import {
   MenuItem,
 } from '@material-tailwind/react';
 
-const PlayerMenu = () => {
-  const [volume, setVolume] = useState(100);
-  const [showVolume, setShowVolume] = useState(false);
-
-  const onVolumeChange = (e) => {
-    setVolume(e.target.value);
-    console.log(volume);
-  };
-
+const PlayerMenu = ({ placement, animate }) => {
   return (
-    <div className="flex">
-      {showVolume && (
-        <div
-          className="h-screen w-screen fixed -bottom-12 left-0"
-          onClick={() => setShowVolume((prev) => !prev)}
-        ></div>
-      )}
-
-      <div className="relative">
+    <Menu placement={placement} animate={animate}>
+      <MenuHandler>
         <Image
-          src="/music-player/volume.svg"
+          src="/music-player/menu.svg"
           width={28}
           height={28}
-          className="cursor-pointer mr-6"
-          alt="volume button"
-          onClick={() => setShowVolume((prev) => !prev)}
+          className="cursor-pointer ml-6"
+          alt="menu button"
         />
+      </MenuHandler>
 
-        {showVolume && (
-          <div className="absolute flex justify-center items-center -rotate-90 -left-12 bottom-24">
-            <input
-              value={volume}
-              type="range"
-              min={0}
-              max={100}
-              onChange={(e) => onVolumeChange(e)}
-              className="cursor-pointer"
-            />
-          </div>
-        )}
-      </div>
+      <MenuList className="bg-gray-900">
+        <MenuItem className="flex items-center justify-between text-white hover:bg-gray-50/5 hover:text-white hover:font-bold">
+          Donate
+          <Image src="/music-player/donate.svg" width={20} height={20} alt="" />
+        </MenuItem>
 
-      <Menu
-        placement="top-end"
-        animate={{
-          mount: { scale: 1, y: 0, x: 0 },
-          unmount: { scale: 0, y: 100, x: 80 },
-        }}
-      >
-        <MenuHandler>
+        <MenuItem className="flex items-center justify-between text-white hover:bg-gray-50/5 hover:text-white hover:font-bold">
+          Listen Later
+          <Image src="/nav/listen-later.svg" width={20} height={20} alt="" />
+        </MenuItem>
+
+        <MenuItem className="flex items-center justify-between text-white hover:bg-gray-50/5 hover:text-white hover:font-bold">
+          Add to Playlist
           <Image
-            src="/music-player/menu.svg"
-            width={28}
-            height={28}
-            className="cursor-pointer ml-6"
-            alt="menu button"
+            src="/music-player/add-playlist.svg"
+            width={20}
+            height={20}
+            alt=""
           />
-        </MenuHandler>
-
-        <MenuList className="bg-gray-900">
-          <MenuItem className="flex items-center justify-between text-white hover:bg-gray-50/5 hover:text-white hover:font-bold">
-            Donate{' '}
-            <Image
-              src="/music-player/donate.svg"
-              width={20}
-              height={20}
-              alt=""
-            />
-          </MenuItem>
-
-          <MenuItem className="flex items-center justify-between text-white hover:bg-gray-50/5 hover:text-white hover:font-bold">
-            Add to Playlist{' '}
-            <Image
-              src="/music-player/add-playlist.svg"
-              width={20}
-              height={20}
-              alt=""
-            />
-          </MenuItem>
-        </MenuList>
-      </Menu>
-    </div>
+        </MenuItem>
+      </MenuList>
+    </Menu>
   );
 };
 

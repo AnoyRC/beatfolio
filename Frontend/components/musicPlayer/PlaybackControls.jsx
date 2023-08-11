@@ -1,15 +1,8 @@
-'use client';
-
-import { useState } from 'react';
 import Image from 'next/image';
 
+import PlayBtn from '../ui/PlayBtn';
+
 const PlaybackControls = ({ margin }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const togglePlay = () => {
-    setIsPlaying((prevState) => !prevState);
-  };
-
   return (
     <div className="flex items-center mr-10">
       <button>
@@ -21,26 +14,7 @@ const PlaybackControls = ({ margin }) => {
         />
       </button>
 
-      <button
-        className={`p-3 bg-gray-700 rounded-full ${margin}`}
-        onClick={togglePlay}
-      >
-        {isPlaying ? (
-          <Image
-            src="/music-player/pause.svg"
-            width={28}
-            height={28}
-            alt="pause button"
-          />
-        ) : (
-          <Image
-            src="/music-player/play.svg"
-            width={28}
-            height={28}
-            alt="play button"
-          />
-        )}
-      </button>
+      <PlayBtn style={`border-none bg-gray-700 ${margin}`} />
 
       <button>
         <Image
