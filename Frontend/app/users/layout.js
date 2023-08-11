@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function UsersLayout({ children }) {
   return (
-    <main className="h-screen flex max-w-7xl relative mx-auto">
+    <main className="h-screen flex relative">
       <Nav />
 
       <section className="w-full">

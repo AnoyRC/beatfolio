@@ -28,7 +28,7 @@ const Avatar = ({ profilePhoto, name }) => {
           className="flex items-center gap-4 cursor-pointer prevent-select"
         >
           <AvatarComponent
-            size="lg"
+            size="md"
             alt="avatar"
             src="/profile/profile-image.png"
             className="border border-purple-500 shadow-xl shadow-purple-900/20 ring-4 ring-purple-500/30"

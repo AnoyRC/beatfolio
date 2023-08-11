@@ -9,10 +9,10 @@ export const metadata = {
 
 export default function AlbumsLayout({ children }) {
   return (
-    <main className="h-screen flex max-w-7xl relative mx-auto">
+    <main className="h-screen flex relative">
       <Nav />
 
-      <section className="w-full">
+      <section className="w-full overflow-y-auto no-scrollbar no-scrollbar::-webkit-scrollbar">
         <PageHeader title="Albums" />
         {children}
       </section>
