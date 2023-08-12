@@ -16,6 +16,7 @@ export default function UsersLayout({ children }) {
 
       <section className="w-full">
         <PageHeader />
+
         <div className="h-screen flex relative">
           <section className="w-2/3 overflow-y-auto no-scrollbar no-scrollbar::-webkit-scrollbar">
             {children}
