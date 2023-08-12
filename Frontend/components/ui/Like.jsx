@@ -15,7 +15,7 @@ const Like = ({ liked }) => {
       {isLiked ? (
         <Image
           src="/common/red-like.svg"
-          className="cursor-pointer"
+          className="cursor-pointer hover:scale-110 active:scale-95"
           width={28}
           height={28}
           onClick={toggleLike}
@@ -24,7 +24,7 @@ const Like = ({ liked }) => {
       ) : (
         <Image
           src="/common/like.svg"
-          className="cursor-pointer"
+          className="cursor-pointer hover:scale-110 active:scale-95"
           width={28}
           height={28}
           onClick={toggleLike}

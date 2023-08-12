@@ -1,4 +1,4 @@
-const { default: FeedGrid } = require('./Feed');
+import Feed from './Feed';
 
 const FeedsContainer = ({ songs }) => {
   if (!songs) {
@@ -33,7 +33,8 @@ const FeedsContainer = ({ songs }) => {
   return (
     <section className="grid grid-cols-8">
       {songs.map((song, index) => (
-        <FeedGrid
+        <Feed
+          key={song.id ? song.id : index}
           isLiked={song.isLiked}
           songImage={song.songImage}
           number={index}

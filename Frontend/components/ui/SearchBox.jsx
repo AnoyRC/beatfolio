@@ -17,7 +17,7 @@ const SearchBox = () => {
         src="/search.svg"
         width={28}
         height={28}
-        alt=''
+        alt=""
         className="absolute left-6 cursor-pointer"
         onClick={handleIconClick}
       />
@@ -25,7 +25,7 @@ const SearchBox = () => {
       <input
         ref={inputRef}
         label="Search"
-        className="outline-none bg-gray-600 rounded-full px-6 py-3 pl-16 text-xl text-white w-full"
+        className="outline-none bg-gray-800 rounded-full px-6 py-3 pl-16 text-xl text-white w-full"
         placeholder="Search"
         value={value}
         onChange={(e) => setValue(e.target.value)}
