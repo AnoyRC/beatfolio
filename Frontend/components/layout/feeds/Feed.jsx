@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
 import PlayBtn from '../../ui/PlayBtn';
-import SongDetails from './SongDetails';
+import FeedDetails from './FeedDetails';
 import Like from '../../ui/Like';
 import PlayerMenu from '../../musicPlayer/PlayerMenu';
 
-const FeedGrid = ({
+const Feed = ({
   songImage,
   isLiked,
   genre,
@@ -29,14 +29,14 @@ const FeedGrid = ({
       />
 
       <div className="flex justify-between items-center px-6 py-9">
-        <SongDetails
+        <FeedDetails
           singerImage={singerImage}
           songName={songName}
           singerName={singer}
           genre={genre}
         />
 
-        <div className="flex z-10">
+        <div className="flex z-10 mr-3">
           <Like liked={isLiked} />
           <PlayerMenu
             placement="bottom-end"
@@ -53,4 +53,4 @@ const FeedGrid = ({
   );
 };
 
-export default FeedGrid;
+export default Feed;

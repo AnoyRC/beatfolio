@@ -17,7 +17,7 @@ const PlayerMenu = ({ placement, animate }) => {
           src="/music-player/menu.svg"
           width={28}
           height={28}
-          className="cursor-pointer ml-6"
+          className="cursor-pointer ml-6 hover:scale-110 hover:opacity-80 active:scale-95"
           alt="menu button"
         />
       </MenuHandler>
