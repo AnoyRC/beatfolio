@@ -1,7 +1,7 @@
 const SongDetails = ({ singerName, subscriber }) => {
   return (
     <div className="flex flex-col justify-center py-1">
-      <h3 className="text-2xl font-semibold">
+      <h3 className="text-2xl font-normal">
         {singerName ? singerName : 'Song Name'}
       </h3>
 

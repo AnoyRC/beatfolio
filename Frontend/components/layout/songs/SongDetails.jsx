@@ -1,12 +1,8 @@
-'use client';
-
-import Image from 'next/image';
-
 const SongDetails = ({ songName, singerName, genre }) => {
   return (
     <div className="flex items-center py-1">
       <div>
-        <h3 className="text-2xl font-semibold">
+        <h3 className="text-2xl font-normal">
           {songName ? songName : 'Song Name'}
         </h3>
 
