@@ -15,7 +15,7 @@ const NavItem = ({ content, href, src, alt }) => {
           mount: { scale: 1, x: 10 },
           unmount: { scale: 0, x: -32 },
         }}
-        className="border border-gray-300 px-4 py-2 font-bold text-gradiant relative z-50"
+        className="border border-gray-300 px-4 py-2 font-bold text-white bg-gray-900 relative z-50"
       >
         <Image src={src} alt={alt} width={24} height={24} />
       </Tooltip>

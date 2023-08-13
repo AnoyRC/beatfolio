@@ -7,7 +7,7 @@ const PlaylistItem = ({
   playlistTracks,
 }) => {
   return (
-    <section className="flex justify-between items-center hover:bg hover:bg-gray-50/5 rounded-lg mb-2 cursor-pointer p-2">
+    <section className="flex justify-between items-center hover:bg-gray-50/5 rounded-lg mb-2 cursor-pointer p-2">
       <div className="flex gap-5 items-center h-20">
         <Image
           src={playlistImage}

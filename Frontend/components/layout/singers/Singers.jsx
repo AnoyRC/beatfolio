@@ -22,7 +22,7 @@ const Singers = ({ url, singers }) => {
   }
 
   return (
-    <section className="mb-16">
+    <section className="mb-4">
       <div className="flex justify-between items-start">
         <h2 className="text-2xl font-medium uppercase mb-4 text-gray-700">
           Top Singers
