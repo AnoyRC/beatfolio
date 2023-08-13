@@ -14,20 +14,18 @@ export default function UsersLayout({ children }) {
     <main className="h-screen flex relative">
       <Nav />
 
-      <section className="w-full">
-        <PageHeader />
+      <section className="w-full relative grid grid-cols-9">
+        <PageHeader isGrid={true} />
 
-        <div className="h-screen flex relative">
-          <section className="w-2/3 overflow-y-auto no-scrollbar no-scrollbar::-webkit-scrollbar">
-            {children}
-          </section>
+        <section className="col-span-6 overflow-y-auto no-scrollbar no-scrollbar::-webkit-scrollbar">
+          {children}
+        </section>
 
-          <aside className="w-1/3 mb-16 px-2 overflow-y-auto no-scrollbar no-scrollbar::-webkit-scrollbar">
-            <Songs heading="New Releases" url="" songs={''} />
-            <Songs heading="Top Releases" url="" songs={''} />
-            <Singers url="" singers="" />
-          </aside>
-        </div>
+        <aside className="col-span-3 px-2 overflow-y-auto no-scrollbar no-scrollbar::-webkit-scrollbar">
+          <Songs heading="New Releases" url="" songs={''} />
+          <Songs heading="Top Releases" url="" songs={''} />
+          <Singers url="" singers="" />
+        </aside>
       </section>
     </main>
   );

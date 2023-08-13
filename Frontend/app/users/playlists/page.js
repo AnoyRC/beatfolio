@@ -1,3 +1,11 @@
+import PlaylistLists from '@/components/layout/lists/PlaylistLists';
+
 export default function Page() {
-  return <section>Playlists</section>;
+  return (
+    <section>
+      <PlaylistLists playlists={''} />
+      <PlaylistLists playlists={''} />
+      <PlaylistLists playlists={''} />
+    </section>
+  );
 }

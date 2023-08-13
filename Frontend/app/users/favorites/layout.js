@@ -5,5 +5,5 @@ export const metadata = {
 };
 
 export default function FavLayout({ children }) {
-  return <section>{children}</section>;
+  return <>{children}</>;
 }

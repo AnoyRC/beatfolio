@@ -4,7 +4,7 @@ import UnderlineTabs from '@/components/ui/UnderlineTabs';
 
 export default function Page() {
   return (
-    <section className="mx-2 mb-32">
+    <section className="mx-2">
       <Feed
         isLiked={true}
         songImage="/song-photos/song-photo-6.png"
