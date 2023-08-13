@@ -5,5 +5,5 @@ export const metadata = {
 };
 
 export default function PlaylistsLayout({ children }) {
-  return <section>{children}</section>;
+  return <>{children}</>;
 }

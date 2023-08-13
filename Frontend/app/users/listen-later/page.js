@@ -1,3 +1,10 @@
+import TrackLists from '@/components/layout/lists/TrackLists';
+
 export default function Page() {
-  return <section>Listen</section>;
+  return (
+    <section>
+      <TrackLists tracks={''} />
+      <TrackLists tracks={''} />
+    </section>
+  );
 }
