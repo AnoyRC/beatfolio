@@ -1,12 +1,14 @@
-import './globals.css';
-import { Inter } from 'next/font/google';
+import "./globals.css";
+import { Inter } from "next/font/google";
+import WalletsProvider from "@/components/WalletsProvider";
+import ReduxProvider from "@/redux/ReduxProvider";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'Beatfolio',
+  title: "Beatfolio",
   description:
-    'A decentralized social media platform tailored exclusively for artists, musicians, and creators.',
+    "A decentralized social media platform tailored exclusively for artists, musicians, and creators.",
 };
 
 export default function RootLayout({ children }) {
@@ -14,10 +16,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         className={
-          inter.className + ' h-screen overflow-hidden max-w-7xl mx-auto'
+          inter.className + " h-screen overflow-hidden max-w-7xl mx-auto"
         }
       >
-        {children}
+        <ReduxProvider>
+          <WalletsProvider>{children}</WalletsProvider>
+        </ReduxProvider>
       </body>
     </html>
   );
