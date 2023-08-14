@@ -50,7 +50,6 @@ module.exports = withMT({
         },
 
         '.btn-gradiant': {
-          'border-radius': '50px',
           background: 'linear-gradient(42deg, #2418CB 0%, #FA465D 100%)',
         },
 
