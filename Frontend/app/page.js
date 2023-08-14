@@ -12,6 +12,7 @@ export default function Home() {
       <HomeNav />
 
       <Header />
+
       <Image
         src={VhLines}
         alt=""
