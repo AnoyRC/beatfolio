@@ -36,8 +36,9 @@ const TrackLists = ({ tracks }) => {
 
   return (
     <div className="m-2">
-      {tracks.map((track) => (
+      {tracks.map((track, index) => (
         <TrackItem
+          key={index}
           trackName={track.name}
           trackImage={track.images}
           trackDate={track.release_date}

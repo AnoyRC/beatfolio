@@ -32,8 +32,9 @@ const PlaylistLists = ({ playlists }) => {
 
   return (
     <div className="m-2">
-      {playlists.map((playlist) => (
+      {playlists.map((playlist, index) => (
         <PlaylistItem
+          key={index}
           playlistName={playlist.name}
           playlistImage={playlist.images}
           playlistDate={playlist.release_date}

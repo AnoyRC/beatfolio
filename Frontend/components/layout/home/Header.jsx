@@ -4,12 +4,12 @@ const header = () => {
   return (
     <header className="flex w-full pl-10 pr-32 mb-24">
       <div className="py-36">
-        <h1 className="text-7xl font-bold">
+        <h1 className="text-7xl leading-tight font-bold">
           <span className="block">Unleash Your</span>
           <span className="text-gradiant">{' Musical Creativity'}</span>
         </h1>
 
-        <p className="text-gray-500 max-w-xs mt-7">
+        <p className="text-gray-500 max-w-xs mt-2">
           The future of music streaming platform that gives you the power to
           build a more equitable{' '}
           <span className="text-gradiant">Music Industry.</span>

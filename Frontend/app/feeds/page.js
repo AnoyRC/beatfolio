@@ -3,8 +3,8 @@ import FeedsContainer from '@/components/layout/feeds/FeedsContainer';
 
 export default function Home() {
   return (
-    <section>
+    <>
       <FeedsContainer />
-    </section>
+    </>
   );
 }
