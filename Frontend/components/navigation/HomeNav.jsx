@@ -7,7 +7,7 @@ import logo from '@/public/logo-lg.svg';
 
 const HomeNav = () => {
   return (
-    <nav className="sticky top-0 px-10 bg-[#1c1c1c]/20 backdrop-blur flex justify-between h-20 items-center w-full">
+    <nav className="sticky top-0 px-10 bg-[#1c1c1c]/20 backdrop-blur flex justify-between h-20 items-center w-full z-10">
       <Image src={logo} alt="logo" />
 
       <ul className="flex items-center gap-x-14">
