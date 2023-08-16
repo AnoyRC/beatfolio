@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 import Avatar from '../profile/Avatar';
 
 const WalletBtn = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const { connected } = useWallet();
 
   const WalletMultiButtonDynamic = dynamic(
     async () =>
@@ -16,7 +17,7 @@ const WalletBtn = () => {
 
   return (
     <>
-      {isLogin ? (
+      {connected ? (
         <Avatar profilePhoto="" name="" />
       ) : (
         <>
