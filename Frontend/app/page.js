@@ -6,6 +6,7 @@ import Header from '@/components/layout/home/Header';
 import VhLines from '@/public/home/vh-lines.svg';
 import music from '@/public/home/music.svg';
 import About from '@/components/layout/home/About';
+import Ripple from '@/components/layout/home/Ripple';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
 
       <Header />
       <About />
+      <Ripple />
 
       <Image
         src={VhLines}
