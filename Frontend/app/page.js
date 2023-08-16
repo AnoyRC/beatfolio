@@ -5,7 +5,11 @@ import Header from '@/components/layout/home/Header';
 
 import VhLines from '@/public/home/vh-lines.svg';
 import music from '@/public/home/music.svg';
+
 import About from '@/components/layout/home/About';
+import Ripple from '@/components/layout/home/Ripple';
+import SignUp from '@/components/layout/home/SignUp';
+import Footer from '@/components/layout/home/Footer';
 
 export default function Home() {
   return (
@@ -14,6 +18,9 @@ export default function Home() {
 
       <Header />
       <About />
+      <Ripple />
+      <SignUp />
+      <Footer />
 
       <Image
         src={VhLines}

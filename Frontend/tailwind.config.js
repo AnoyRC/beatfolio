@@ -17,10 +17,22 @@ module.exports = withMT({
             opacity: 0,
           },
         },
+
+        growAndFade: {
+          '0%': {
+            opacity: 0.25,
+            transform: 'scale(0)',
+          },
+          '100%': {
+            opacity: 0,
+            transform: 'scale(1)',
+          },
+        },
       },
 
       animation: {
         like: 'like 1s ease-in-out 1',
+        growAndFade: 'growAndFade 4s infinite ease-out',
       },
     },
   },
@@ -58,8 +70,17 @@ module.exports = withMT({
           'border-image': 'linear-gradient(42deg, #2418CB 0%, #FA465D 100%) 1',
         },
 
-        '.grid-desktop': {
-          'grid-template-columns': 'fit-content(100%) 1fr',
+        '.grow-and-fade': {
+          'background-color': 'white',
+          'border-radius': '50%',
+          height: '100%',
+          opacity: '0',
+          position: 'absolute',
+          width: '100%',
+        },
+
+        '.text-stroke': {
+          '-webkit-text-stroke': '1px white',
         },
       });
     }),
