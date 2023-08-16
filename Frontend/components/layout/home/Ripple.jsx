@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const Ripple = () => {
   return (
-    <section className="flex justify-between items-center mt-32">
+    <section className="flex justify-between items-center mt-32 mb-40">
       <div class="relative w-[440px] h-[440px]">
         <div class="grow-and-fade animate-growAndFade"></div>
         <div
