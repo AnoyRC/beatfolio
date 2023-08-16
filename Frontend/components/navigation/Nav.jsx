@@ -2,6 +2,7 @@ import Image from 'next/image';
 import NavItem from './NavItem';
 import NavItems from './NavItems';
 import Link from 'next/link';
+import Logout from '../ui/Logout';
 
 const Nav = () => {
   return (
@@ -18,12 +19,7 @@ const Nav = () => {
 
       <NavItems />
 
-      <NavItem
-        content="Setting"
-        href="/users/setting"
-        src="/nav/setting.svg"
-        alt="setting"
-      />
+      <Logout />
     </nav>
   );
 };

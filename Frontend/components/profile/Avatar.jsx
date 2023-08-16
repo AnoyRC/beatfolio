@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 import {
   Avatar as AvatarComponent,
@@ -13,6 +14,11 @@ import {
 
 const Avatar = ({ profilePhoto, name }) => {
   const router = useRouter();
+  const { disconnect } = useWallet();
+
+  const disconnectWallet = () => {
+    disconnect();
+  };
 
   return (
     <Menu
@@ -56,19 +62,8 @@ const Avatar = ({ profilePhoto, name }) => {
 
         <MenuItem
           className="flex items-center text-white hover:bg-gray-50/5 hover:text-white hover:font-bold"
-          onClick={() => router.push('/users/setting')}
+          onClick={disconnectWallet}
         >
-          <Image
-            src="/nav/setting.svg"
-            width={20}
-            height={20}
-            alt=""
-            className="mr-3"
-          />
-          Setting
-        </MenuItem>
-
-        <MenuItem className="flex items-center text-white hover:bg-gray-50/5 hover:text-white hover:font-bold">
           <Image
             src="/profile/logout.svg"
             width={20}
