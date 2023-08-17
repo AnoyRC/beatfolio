@@ -9,6 +9,9 @@ const UserSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
+  likedSongs: {
+    type: [String],
+  },
   playlists: {
     type: [String],
   },

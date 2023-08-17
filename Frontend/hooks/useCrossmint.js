@@ -67,4 +67,31 @@ export default function useCrossmint() {
 
     return res;
   };
+
+  const fetchUser = async (publicKey) => {
+    const config = {
+      headers: {
+        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
+        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+      },
+    };
+
+    axios
+      .get(
+        `https://staging.crossmint.com/api/2022-06-09/collections/0e249985-9d8e-443a-8f17-32b4f9e12592/nfts?page=1&perPage=50`,
+        config
+      )
+      .then((res) => {
+        res.data.forEach((user) => {
+          if (user.id === publicKey) {
+            return user;
+          }
+        });
+      })
+      .catch((err) => {
+        return null;
+      });
+  };
+
+  return { mintUser, mintSong, fetchUser };
 }
