@@ -32,6 +32,16 @@ router.post(
   }
 );
 
+router.get("/:id", async (req, res) => {
+  try {
+    const playlist = await Playlist.findOne({ playlistId: req.params.id });
+    res.json(playlist);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 router.get("/all", async (req, res) => {
   try {
     const playlists = await Playlist.find();
@@ -79,6 +89,18 @@ router.post("/remove/:playlistId/:songId", auth, async (req, res) => {
     selectedPlaylist.songs = songs;
     await selectedPlaylist.save();
     res.json(selectedPlaylist);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.get("/songs/:playlistId", async (req, res) => {
+  try {
+    const selectedPlaylist = await Playlist.findOne({
+      playlistId: req.params.playlistId,
+    });
+    res.json(selectedPlaylist.songs);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
