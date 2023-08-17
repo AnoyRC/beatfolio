@@ -8,24 +8,9 @@ import {
   TabPanel,
 } from '@material-tailwind/react';
 import { useState } from 'react';
-import PlaylistLists from '../layout/lists/PlaylistLists';
-import TrackLists from '../layout/lists/TrackLists';
 
-const UnderlineTabs = () => {
-  const [activeTab, setActiveTab] = useState('playlists');
-
-  const data = [
-    {
-      label: 'Playlists',
-      value: 'playlists',
-      jsx: <PlaylistLists />,
-    },
-    {
-      label: 'Tracks',
-      value: 'tracks',
-      jsx: <TrackLists />,
-    },
-  ];
+const UnderlineTabs = ({ data, value }) => {
+  const [activeTab, setActiveTab] = useState(value);
 
   return (
     <Tabs value={activeTab}>

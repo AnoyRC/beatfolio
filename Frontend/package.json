@@ -17,6 +17,7 @@
     "@solana/wallet-adapter-wallets": "^0.19.20",
     "@solana/web3.js": "^1.78.4",
     "autoprefixer": "10.4.14",
+    "date-fns": "^2.30.0",
     "encoding": "^0.1.13",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
