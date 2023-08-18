@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {};
 
 export const defaultSlice = createSlice({
-  name: "default",
+  name: 'default',
   initialState,
   reducers: {},
 });

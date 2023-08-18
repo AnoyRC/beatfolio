@@ -12,11 +12,11 @@ export default function useCrossmint() {
     };
 
     const body = JSON.stringify({
-      recipient: publicKey,
+      recipient: `solana:${publicKey}`,
       metadata: {
         name: user.name,
         description: user.description,
-        image: user.image,
+        image: `https://${user.image}.ipfs.w3s.link`,
       },
     });
 

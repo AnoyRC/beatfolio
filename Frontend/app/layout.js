@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import WalletsProvider from '@/provider/WalletsProvider';
 import ReduxProvider from '@/provider/ReduxProvider';
 import SignupModal from '@/components/modal/SignupModal';
+import AddSongModal from '@/components/modal/AddSongModal';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,7 +23,8 @@ export default function RootLayout({ children }) {
       >
         <ReduxProvider>
           <WalletsProvider>
-            <SignupModal />
+            {/* <SignupModal /> */}
+            <AddSongModal />
             {children}
           </WalletsProvider>
         </ReduxProvider>
