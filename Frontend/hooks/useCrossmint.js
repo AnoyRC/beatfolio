@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default function useCrossmint() {
   const mintUser = async (user, publicKey) => {
     const config = {
       headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+        accept: 'application/json',
+        'content-type': 'application/json',
+        'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+        'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
       },
     };
 
@@ -37,10 +37,10 @@ export default function useCrossmint() {
   const mintSong = async (song, publicKey) => {
     const config = {
       headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+        accept: 'application/json',
+        'content-type': 'application/json',
+        'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+        'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
       },
     };
 
@@ -50,7 +50,11 @@ export default function useCrossmint() {
         name: song.name,
         description: song.description,
         image: song.image,
-        attributes: [{ trait_type: "Song Link", value: song.songLink }],
+        attributes: [
+          { trait_type: 'Song Link', value: song.songLink },
+          { trait_type: 'Genre', value: song.genre },
+          { trait_type: 'Mood', value: song.mood },
+        ],
       },
     });
 
@@ -71,8 +75,8 @@ export default function useCrossmint() {
   const fetchUser = async (publicKey) => {
     const config = {
       headers: {
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+        'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+        'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
       },
     };
 

@@ -14,6 +14,7 @@ const SignUp = () => {
         src="/home/singer.png"
         width={320}
         height={295}
+        alt="Singer singing song"
         className="absolute bottom-0 right-24 z-10"
       />
 
@@ -22,6 +23,7 @@ const SignUp = () => {
         fill
         objectFit="cover"
         className="mr-10"
+        alt=""
       />
     </section>
   );
