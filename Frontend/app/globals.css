@@ -18,7 +18,15 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+.textarea-color:-moz-placeholder,
+.textarea-color::-moz-placeholder,
+.textarea-color:-ms-input-placeholder,
+.textarea-color::-webkit-input-placeholder,
+.textarea-color::placeholder {
+  color: #0bf;
+}
 
 .wallet-adapter-button {
   background-color: transparent;
@@ -27,7 +35,7 @@ body {
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-family: "DM Sans", "Roboto", "Helvetica Neue", Helvetica, Arial,
+  font-family: 'DM Sans', 'Roboto', 'Helvetica Neue', Helvetica, Arial,
     sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -100,7 +108,7 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: opacity 200ms ease, transform 200ms ease, visibility 200ms;
-  font-family: "DM Sans", "Roboto", "Helvetica Neue", Helvetica, Arial,
+  font-family: 'DM Sans', 'Roboto', 'Helvetica Neue', Helvetica, Arial,
     sans-serif;
 }
 
@@ -223,7 +231,7 @@ body {
   border-radius: 10px;
   background: #10141f;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
-  font-family: "DM Sans", "Roboto", "Helvetica Neue", Helvetica, Arial,
+  font-family: 'DM Sans', 'Roboto', 'Helvetica Neue', Helvetica, Arial,
     sans-serif;
   flex: 1;
 }

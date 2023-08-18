@@ -26,6 +26,7 @@ const header = () => {
           fill
           objectFit="contain"
           objectPosition="top right"
+          alt="Animated girl listening to music"
         />
       </div>
     </header>

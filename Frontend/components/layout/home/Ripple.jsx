@@ -22,7 +22,7 @@ const Ripple = () => {
           style={{ animationDelay: '3.2s' }}
         ></div>
 
-        <Image src="/home/ripple-image.png" fill objectFit="contain" />
+        <Image src="/home/ripple-image.png" fill objectFit="contain" alt="" />
       </div>
 
       <h2 className="text-7xl font-bold leading-tight">
