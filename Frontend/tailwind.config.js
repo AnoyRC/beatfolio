@@ -18,21 +18,19 @@ module.exports = withMT({
           },
         },
 
-        growAndFade: {
+        growAndShrink: {
           '0%': {
-            opacity: 0.25,
-            transform: 'scale(0)',
+            transform: 'translateX(-50%) translateY(-50%) scale(0.98)',
           },
           '100%': {
-            opacity: 0,
-            transform: 'scale(1)',
+            transform: 'translateX(-50%) translateY(-50%) scale(1.02)',
           },
         },
       },
 
       animation: {
         like: 'like 1s ease-in-out 1',
-        growAndFade: 'growAndFade 4s infinite ease-out',
+        growAndShrink: 'growAndShrink .1s ease-out 5',
       },
     },
   },

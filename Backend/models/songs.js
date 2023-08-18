@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const SongSchema = new mongoose.Schema({
   songId: {
@@ -11,4 +11,4 @@ const SongSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Song = mongoose.model("song", SongSchema);
+module.exports = Song = mongoose.model('song', SongSchema);
