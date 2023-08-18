@@ -1,9 +1,22 @@
 'use client';
 
-import { Card, Input, Button, Textarea } from '@material-tailwind/react';
 import { useRef, useState } from 'react';
+import axios from 'axios';
+import { Card, Input, Button, Textarea } from '@material-tailwind/react';
+import { toast } from 'react-hot-toast';
+
+import useCrossmint from '@/hooks/useCrossmint';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { saveProfileToIPFS } from '@/hooks/saveToIPFS';
+import { useSelector } from 'react-redux';
 
 export default function SimpleRegistrationForm() {
+  const [name, setName] = useState('');
+  const [signature, setSignature] = useState('');
+  const [bio, setBio] = useState('');
+  const { mintUser } = useCrossmint();
+  const { publicKey } = useWallet();
+
   const [isAnimating, setIsAnimating] = useState(false);
   const modalRef = useRef(null);
 
@@ -15,6 +28,26 @@ export default function SimpleRegistrationForm() {
       setIsAnimating(false);
       modalRef.current.classList.remove('animate-growAndShrink');
     }, 500);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const image = await saveProfileToIPFS(e.target[0].files[0]);
+
+    const userData = await mintUser(
+      {
+        name,
+        description: bio,
+        image,
+      },
+      publicKey.toString()
+    );
+
+    // const auth = await axios.post('http://localhost:8081/api/auth', {
+    //   signature,
+    //   address: publicKey.toString(),
+    // });
   };
 
   return (
@@ -37,7 +70,10 @@ export default function SimpleRegistrationForm() {
           Enter your details to register.
         </p>
 
-        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+        <form
+          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+          onSubmit={handleSubmit}
+        >
           <div className="mb-4 flex flex-col gap-6 text-white">
             <Input
               color="white"
@@ -46,17 +82,25 @@ export default function SimpleRegistrationForm() {
               label="Profile Photo"
               required
             />
-            <Input color="white" size="lg" label="Your Name" required />
-            <Input color="white" size="lg" label="Your Signature" required />
+            <Input
+              color="white"
+              size="lg"
+              label="Your Name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              required
+            />
             <Textarea
               color="purple"
               success
               label="Write a small Bio"
+              onChange={(e) => setBio(e.target.value)}
+              value={bio}
               className="text-white"
             />
           </div>
 
-          <Button className="mt-6 btn-gradiant" fullWidth>
+          <Button className="mt-6 btn-gradiant" fullWidth type="submit">
             Register
           </Button>
         </form>

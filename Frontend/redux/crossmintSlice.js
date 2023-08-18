@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   currentUser: null,
@@ -12,12 +12,12 @@ const initialState = {
 };
 
 export const fetchUser = createAsyncThunk(
-  "user/fetchUser",
+  'user/fetchUser',
   async (publicKey) => {
     const config = {
       headers: {
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+        'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+        'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
       },
     };
 
@@ -39,17 +39,17 @@ export const fetchUser = createAsyncThunk(
   }
 );
 
-export const fetchSong = createAsyncThunk("song/fetchSong", async (id) => {
+export const fetchSong = createAsyncThunk('song/fetchSong', async (id) => {
   const config = {
     headers: {
-      "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-      "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+      'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+      'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
     },
   };
 
   axios
     .get(
-      "https://staging.crossmint.com/api/2022-06-09/collections/c3d92820-7264-443c-a859-4857d6832c28/nfts?page=1&perPage=50",
+      'https://staging.crossmint.com/api/2022-06-09/collections/c3d92820-7264-443c-a859-4857d6832c28/nfts?page=1&perPage=50',
       config
     )
     .then((res) => {
@@ -65,18 +65,18 @@ export const fetchSong = createAsyncThunk("song/fetchSong", async (id) => {
 });
 
 export const fetchAllUsers = createAsyncThunk(
-  "user/fetchAllUsers",
+  'user/fetchAllUsers',
   async () => {
     const config = {
       headers: {
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+        'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+        'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
       },
     };
 
     axios
       .get(
-        "https://staging.crossmint.com/api/2022-06-09/collections/0e249985-9d8e-443a-8f17-32b4f9e12592/nfts?page=1&perPage=50",
+        'https://staging.crossmint.com/api/2022-06-09/collections/0e249985-9d8e-443a-8f17-32b4f9e12592/nfts?page=1&perPage=50',
         config
       )
       .then((res) => {
@@ -89,18 +89,18 @@ export const fetchAllUsers = createAsyncThunk(
 );
 
 export const fetchAllSongs = createAsyncThunk(
-  "song/fetchAllSongs",
+  'song/fetchAllSongs',
   async () => {
     const config = {
       headers: {
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+        'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+        'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
       },
     };
 
     axios
       .get(
-        "https://staging.crossmint.com/api/2022-06-09/collections/c3d92820-7264-443c-a859-4857d6832c28/nfts?page=1&perPage=50",
+        'https://staging.crossmint.com/api/2022-06-09/collections/c3d92820-7264-443c-a859-4857d6832c28/nfts?page=1&perPage=50',
         config
       )
       .then((res) => {
@@ -113,18 +113,18 @@ export const fetchAllSongs = createAsyncThunk(
 );
 
 export const fetchUserSongs = createAsyncThunk(
-  "song/fetchUserSongs",
+  'song/fetchUserSongs',
   async (publicKey) => {
     const config = {
       headers: {
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+        'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+        'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
       },
     };
 
     axios
       .get(
-        "https://staging.crossmint.com/api/2022-06-09/collections/c3d92820-7264-443c-a859-4857d6832c28/nfts?page=1&perPage=50",
+        'https://staging.crossmint.com/api/2022-06-09/collections/c3d92820-7264-443c-a859-4857d6832c28/nfts?page=1&perPage=50',
         config
       )
       .then((res) => {
@@ -139,7 +139,7 @@ export const fetchUserSongs = createAsyncThunk(
 );
 
 export const crossmintSlice = createSlice({
-  name: "crossmint",
+  name: 'crossmint',
   initialState,
   reducers: {},
   extraReducers: {
