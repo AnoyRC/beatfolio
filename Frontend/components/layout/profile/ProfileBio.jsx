@@ -5,7 +5,6 @@ import { format } from 'date-fns';
 import { useMemo } from 'react';
 
 const ProfileAbout = ({
-  userEmail,
   userCreatedAt,
   userLocation,
   userName,
@@ -42,41 +41,7 @@ const ProfileAbout = ({
         </div>
       </div>
 
-      <div className="flex flex-col mt-4">
-        {userBio && <p className="mb-4">{userBio}</p>}
-
-        <div className="flex gap-6">
-          <div className="flex flex-row items-center gap-2 text-neutral-500">
-            <div className="flex items-center space-x-3 text-gray-400">
-              <Image
-                src="/profile/location.svg"
-                width={28}
-                height={28}
-                alt="Calendar"
-                className="h-5 w-5 transition-transform duration-150 ease-out hover:scale-150"
-              />
-            </div>
-
-            <p className="text-gray-500">
-              {userLocation ? userLocation : 'Abc, Def'}
-            </p>
-          </div>
-
-          <div className="flex flex-row items-center gap-2 text-neutral-500">
-            <div className="flex items-center space-x-3 text-gray-400">
-              <Image
-                src="/profile/calendar.svg"
-                width={28}
-                height={28}
-                alt="Calendar"
-                className="h-5 w-5 transition-transform duration-150 ease-out hover:scale-150"
-              />
-            </div>
-
-            <p className="text-gray-500">Joined {createdAt}</p>
-          </div>
-        </div>
-      </div>
+      {userBio && <p className="mb-4">{userBio}</p>}
 
       <div className="flex items-center mt-4 gap-6">
         <div className="flex items-center gap-1">

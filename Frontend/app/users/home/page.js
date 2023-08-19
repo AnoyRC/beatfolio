@@ -9,12 +9,12 @@ export default function Page() {
     {
       label: 'Playlists',
       value: 'playlists',
-      jsx: <PlaylistLists />,
+      jsx: <PlaylistLists playlists={''} />,
     },
     {
       label: 'Tracks',
       value: 'tracks',
-      jsx: <TrackLists />,
+      jsx: <TrackLists tracks={''} />,
     },
   ];
 
@@ -27,7 +27,7 @@ export default function Page() {
       />
 
       <PlaylistContainer />
-      <UnderlineTabs data={data} value={'Playlists'} />
+      <UnderlineTabs data={data} value="playlists" />
     </section>
   );
 }

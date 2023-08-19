@@ -6,42 +6,33 @@ import axios from 'axios';
 import { Card, Input, Button, Textarea } from '@material-tailwind/react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeUploadModal } from '@/redux/modalSlice';
+import { closeAddToPlaylistModal } from '@/redux/modalSlice';
 
 import useCrossmint from '@/hooks/useCrossmint';
 import { saveSongToIPFS, saveProfileToIPFS } from '@/hooks/saveToIPFS';
 
-export default function AddSongModal() {
-  const isOpen = useSelector((state) => state.modalSlice.isUploadOpen);
+export default function AddPlaylistModal() {
+  const isOpen = useSelector((state) => state.modalSlice.isAddPlaylistOpen);
   const dispatch = useDispatch();
+  const { publicKey } = useSelector(
+    (state) => state.currentUserSlice.publicKey
+  );
 
-  const [songTitle, setSongTitle] = useState('');
-  const [songGenre, setSongGenre] = useState('');
-  const [songMood, setSongMood] = useState('');
+  const [playlistTitle, setplaylistTitle] = useState('');
 
-  const { mintSong } = useCrossmint();
   const { fetchUser } = useCrossmint();
-
-  // const { publicKey } = useWallet();
   // const currentUser = fetchUser(publicKey.toString());
 
   const handleModal = () => {
-    dispatch(closeUploadModal());
+    dispatch(closeAddToPlaylistModal());
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const image = saveProfileToIPFS(e.target[0].files[0]);
-    const song = saveSongToIPFS(e.target[1].files[0]);
-
-    await mintSong({
-      name: songTitle,
-      genre: songGenre,
-      mood: songMood,
-      image: image,
-      song: song,
-    });
+    await axios.post(
+      'http://localhost:8081/api/playlist/add/:playlistId/:songId'
+    );
   };
 
   return (
@@ -59,9 +50,9 @@ export default function AddSongModal() {
         >
           <div className="flex justify-between items-start">
             <div>
-              <h3 className="text-white text-2xl font-bold">Upload Song</h3>
+              <h3 className="text-white text-2xl font-bold">Add to Playlist</h3>
               <p className="mt-1 font-normal text-gray-500">
-                Enter your song details to upload
+                Select a playlist to add this song to
               </p>
             </div>
 
@@ -77,46 +68,16 @@ export default function AddSongModal() {
             <div className="mb-4 flex flex-col gap-6 text-white">
               <Input
                 color="white"
-                type="file"
                 size="lg"
-                label="Song Profile Photo"
-                required
-              />
-              <Input
-                color="white"
-                type="file"
-                size="lg"
-                label="Your Song"
-                required
-              />
-              <Input
-                color="white"
-                size="lg"
-                label="Song Title"
-                value={songTitle}
-                onChange={(e) => setSongTitle(e.target.value)}
-                required
-              />
-              <Input
-                color="white"
-                size="lg"
-                label="Geners"
-                value={songGenre}
-                onChange={(e) => setSongGenre(e.target.value)}
-                required
-              />
-              <Input
-                color="white"
-                size="lg"
-                label="Moods"
-                value={songMood}
-                onChange={(e) => setSongMood(e.target.value)}
+                label="Playlist Title"
+                value={playlistTitle}
+                onChange={(e) => setplaylistTitle(e.target.value)}
                 required
               />
             </div>
 
             <Button className="mt-6 btn-gradiant" fullWidth type="submit">
-              Upload
+              Create
             </Button>
           </form>
         </Card>

@@ -2,13 +2,18 @@
 
 import Image from 'next/image';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { useDispatch } from 'react-redux';
+
+import { removeUser } from '@/redux/currentUserSlice';
 
 import { Tooltip } from '@material-tailwind/react';
 
 const Logout = () => {
+  const dispatch = useDispatch();
   const { disconnect, connected } = useWallet();
 
   const disconnectWallet = () => {
+    dispatch(removeUser());
     disconnect();
   };
 
