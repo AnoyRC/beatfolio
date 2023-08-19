@@ -1,25 +1,25 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 const Ripple = () => {
   return (
     <section className="flex justify-between items-center mt-32 mb-40">
-      <div class="relative w-[440px] h-[440px]">
-        <div class="grow-and-fade animate-growAndFade"></div>
+      <div className="relative w-[440px] h-[440px]">
+        <div className="grow-and-fade animate-growAndFade"></div>
         <div
-          class="grow-and-fade animate-growAndFade"
-          style={{ animationDelay: '0.8s' }}
+          className="grow-and-fade animate-growAndFade"
+          style={{ animationDelay: "0.8s" }}
         ></div>
         <div
-          class="grow-and-fade animate-growAndFade"
-          style={{ animationDelay: '1.6s' }}
+          className="grow-and-fade animate-growAndFade"
+          style={{ animationDelay: "1.6s" }}
         ></div>
         <div
-          class="grow-and-fade animate-growAndFade"
-          style={{ animationDelay: '2.4s' }}
+          className="grow-and-fade animate-growAndFade"
+          style={{ animationDelay: "2.4s" }}
         ></div>
         <div
-          class="grow-and-fade animate-growAndFade"
-          style={{ animationDelay: '3.2s' }}
+          className="grow-and-fade animate-growAndFade"
+          style={{ animationDelay: "3.2s" }}
         ></div>
 
         <Image src="/home/ripple-image.png" fill objectFit="contain" alt="" />

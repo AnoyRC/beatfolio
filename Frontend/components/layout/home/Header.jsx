@@ -1,21 +1,40 @@
-import Image from 'next/image';
+"use client";
+import useCrossmint from "@/hooks/useCrossmint";
+import { fetchUser } from "@/redux/crossmintSlice";
+import Image from "next/image";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const header = () => {
+  const { SignMessage } = useCrossmint();
+  const currentUser = useSelector((state) => state.crossmint.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUser("48mLfvwSyQRxdxSXpSUmgTzuEoJNBFhqm1wZahE1aXuj"));
+  }, []);
+
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
+
   return (
     <header className="flex w-full pl-10 pr-32 mb-24">
       <div className="py-36">
         <h1 className="text-7xl leading-tight font-bold">
           <span className="block">Unleash Your</span>
-          <span className="text-gradiant">{' Musical Creativity'}</span>
+          <span className="text-gradiant">{" Musical Creativity"}</span>
         </h1>
 
         <p className="text-gray-500 max-w-xs mt-2">
           The future of music streaming platform that gives you the power to
-          build a more equitable{' '}
+          build a more equitable{" "}
           <span className="text-gradiant">Music Industry.</span>
         </p>
 
-        <button className="px-6 py-3 btn-gradiant rounded-full cursor-pointer font-bold hover:scale-105 active:scale-95 transition-transform duration-150 mt-16">
+        <button
+          className="px-6 py-3 btn-gradiant rounded-full cursor-pointer font-bold hover:scale-105 active:scale-95 transition-transform duration-150 mt-16"
+          onClick={SignMessage}
+        >
           Get Started Now
         </button>
       </div>
