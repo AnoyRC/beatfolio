@@ -8,12 +8,12 @@ import { toast } from 'react-hot-toast';
 import useCrossmint from '@/hooks/useCrossmint';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { saveProfileToIPFS } from '@/hooks/saveToIPFS';
-import { useSelector } from 'react-redux';
 
 export default function SimpleRegistrationForm() {
   const [name, setName] = useState('');
   const [signature, setSignature] = useState('');
   const [bio, setBio] = useState('');
+
   const { mintUser } = useCrossmint();
   const { publicKey } = useWallet();
 
