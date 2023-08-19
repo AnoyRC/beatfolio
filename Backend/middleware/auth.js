@@ -1,23 +1,23 @@
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
-const nacl = require('tweetnacl');
-const bs58 = require('bs58');
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const nacl = require("tweetnacl");
+const bs58 = require("bs58");
 
 module.exports = function (req, res, next) {
   // Get token from header
-  const token = req.header('x-auth-token'); // Check if not token
+  const token = req.header("x-auth-token"); // Check if not token
 
   if (!token) {
     return res.status(401).json({
-      msg: 'No token, authorization denied',
+      msg: "No token, authorization denied",
     });
   } // Verify token
 
-  const address = req.header('x-address');
+  const address = req.header("x-address");
 
   if (!address) {
     return res.status(401).json({
-      msg: 'No address, authorization denied',
+      msg: "No address, authorization denied",
     });
   }
 
@@ -29,12 +29,12 @@ module.exports = function (req, res, next) {
     const verified = nacl.sign.detached.verify(
       new TextEncoder().encode(message),
       bs58.decode(signature),
-      bs58.decode(public_key)
+      bs58.decode(address)
     );
 
     if (!verified) {
       return res.status(401).json({
-        msg: 'Invalid signature',
+        msg: "Invalid signature",
       });
     }
 
@@ -43,7 +43,7 @@ module.exports = function (req, res, next) {
     next();
   } catch (err) {
     res.status(401).json({
-      msg: 'Token is not valid',
+      msg: "Token is not valid",
     });
   }
 };

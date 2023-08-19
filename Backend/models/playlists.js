@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const PlaylistSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
-  like: {
-    type: Boolean,
+  address: {
+    type: String,
     required: true,
   },
   songs: {
@@ -15,4 +15,4 @@ const PlaylistSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Playlist = mongoose.model('playlist', PlaylistSchema);
+module.exports = Playlist = mongoose.model("playlist", PlaylistSchema);

@@ -1,23 +1,23 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const auth = require('../../middleware/auth');
+const auth = require("../../middleware/auth");
 
-const Song = require('../../models/songs');
-const User = require('../../models/users');
+const Song = require("../../models/songs");
+const User = require("../../models/users");
 
-router.post('/like/:songId', auth, async (req, res) => {
+router.post("/like/:songId", auth, async (req, res) => {
   try {
     const selectedSong = Song.findOne({ songId: req.params.songId });
 
     if (selectedSong) {
       const likes = selectedSong.likes;
 
-      likes.push(req.body.address);
+      likes.push(req.address);
       selectedSong.likes = likes;
 
       await selectedSong.save();
 
-      const selectedUser = User.findOne({ address: req.body.address });
+      const selectedUser = User.findOne({ address: req.address });
       const likedSongs = selectedUser.likedSongs;
 
       likedSongs.push(req.params.songId);
@@ -29,11 +29,11 @@ router.post('/like/:songId', auth, async (req, res) => {
     } else {
       const newSong = new Song({
         songId: req.params.songId,
-        likes: [req.body.address],
+        likes: [req.address],
       });
       await newSong.save();
 
-      const selectedUser = User.findOne({ address: req.body.address });
+      const selectedUser = User.findOne({ address: req.address });
       const likedSongs = selectedUser.likedSongs;
 
       likedSongs.push(req.params.songId);
@@ -45,23 +45,23 @@ router.post('/like/:songId', auth, async (req, res) => {
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 });
 
-router.post('/unlike/:songId', auth, async (req, res) => {
+router.post("/unlike/:songId", auth, async (req, res) => {
   try {
     const selectedSong = Song.findOne({ songId: req.params.songId });
 
     if (selectedSong) {
       const likes = selectedSong.likes;
 
-      likes.splice(likes.indexOf(req.body.address), 1);
+      likes.splice(likes.indexOf(req.address), 1);
       selectedSong.likes = likes;
 
       await selectedSong.save();
 
-      const selectedUser = User.findOne({ address: req.body.address });
+      const selectedUser = User.findOne({ address: req.address });
       const likedSongs = selectedUser.likedSongs;
 
       likedSongs.splice(likedSongs.indexOf(req.params.songId), 1);
@@ -77,7 +77,7 @@ router.post('/unlike/:songId', auth, async (req, res) => {
       });
       await newSong.save();
 
-      const selectedUser = User.findOne({ address: req.body.address });
+      const selectedUser = User.findOne({ address: req.address });
       const likedSongs = selectedUser.likedSongs;
 
       likedSongs.splice(likedSongs.indexOf(req.params.songId), 1);
@@ -89,11 +89,11 @@ router.post('/unlike/:songId', auth, async (req, res) => {
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 });
 
-router.get('/likes/:songId', async (req, res) => {
+router.get("/likes/:songId", async (req, res) => {
   try {
     const selectedSong = Song.findOne({ songId: req.params.songId });
 
@@ -104,7 +104,7 @@ router.get('/likes/:songId', async (req, res) => {
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send("Server error");
   }
 });
 
