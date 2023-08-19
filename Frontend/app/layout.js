@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       >
         <ReduxProvider>
           <WalletsProvider>
-            {/* <SignupModal /> */}
+            <SignupModal />
             <AddSongModal />
             {children}
           </WalletsProvider>

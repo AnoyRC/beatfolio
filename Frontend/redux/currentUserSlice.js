@@ -1,8 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  username: '',
+  name: '',
   publicKey: '',
+  description: '',
+  image: '',
 };
 
 export const currentUserSlice = createSlice({
@@ -12,17 +14,21 @@ export const currentUserSlice = createSlice({
     updatePublicKey: (state, action) => {
       state.publicKey = action.payload;
     },
-    updateUsername: (state, action) => {
-      state.username = action.payload;
+    updateUser: (state, action) => {
+      state.name = action.payload.name;
+      state.description = action.payload.description;
+      state.image = action.payload.image;
     },
     removeUser: (state) => {
       state.username = '';
       state.publicKey = '';
+      state.description = '';
+      state.image = '';
     },
   },
 });
 
-export const { updatePublicKey, updateUsername, removeUser } =
+export const { updatePublicKey, updateUser, removeUser } =
   currentUserSlice.actions;
 
 export default currentUserSlice.reducer;

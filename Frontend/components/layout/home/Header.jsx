@@ -1,21 +1,10 @@
 'use client';
-import useCrossmint from '@/hooks/useCrossmint';
-import { fetchUser } from '@/redux/crossmintSlice';
+
 import Image from 'next/image';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 
 const header = () => {
-  const { SignMessage } = useCrossmint();
-  // const currentUser = useSelector((state) => state.crossmint.user);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchUser("48mLfvwSyQRxdxSXpSUmgTzuEoJNBFhqm1wZahE1aXuj"));
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(currentUser);
-  // }, [currentUser]);
+  const router = useRouter();
 
   return (
     <header className="flex w-full pl-10 pr-32 mb-24">
@@ -33,7 +22,7 @@ const header = () => {
 
         <button
           className="px-6 py-3 btn-gradiant rounded-full cursor-pointer font-bold hover:scale-105 active:scale-95 transition-transform duration-150 mt-16"
-          onClick={SignMessage}
+          onClick={() => router.push('/feed')}
         >
           Get Started Now
         </button>
