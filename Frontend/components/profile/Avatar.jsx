@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { useDispatch } from 'react-redux';
+import { openUploadModal } from '@/redux/modalSlice';
 
 import {
   Avatar as AvatarComponent,
@@ -14,6 +16,7 @@ import {
 
 const Avatar = ({ profilePhoto, name }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { disconnect } = useWallet();
 
   const disconnectWallet = () => {
@@ -51,13 +54,27 @@ const Avatar = ({ profilePhoto, name }) => {
           onClick={() => router.push('/users/profile')}
         >
           <Image
-            src={profilePhoto ? profilePhoto : '/profile/profile-icon.svg'}
+            src={'/profile/profile-icon.svg'}
             width={20}
             height={20}
             alt=""
             className="mr-3"
           />
           Profile
+        </MenuItem>
+
+        <MenuItem
+          className="flex items-center text-white hover:bg-gray-50/5 hover:text-white hover:font-bold"
+          onClick={() => dispatch(openUploadModal())}
+        >
+          <Image
+            src={'/profile/upload.svg'}
+            width={20}
+            height={20}
+            alt=""
+            className="mr-3"
+          />
+          Upload Song
         </MenuItem>
 
         <MenuItem

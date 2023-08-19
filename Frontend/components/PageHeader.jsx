@@ -1,3 +1,5 @@
+'use client';
+
 import PageTitle from './ui/PageTitle';
 import SearchBox from './ui/SearchBox';
 import WalletBtn from './ui/WalletBtn';

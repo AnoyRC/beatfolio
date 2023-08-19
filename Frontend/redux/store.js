@@ -2,15 +2,15 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 
-import { defaultSlice } from './defaultSlice';
-import { crossmintSlice } from './crossmintSlice';
-import { signupModalSlice } from './SignupModalSlice';
+import crossmintSlice from './crossmintSlice';
+import modalSlice from './modalSlice';
+import currentUserSlice from './currentUserSlice';
 
 export const store = configureStore({
   reducer: {
-    default: defaultSlice.reducer,
-    crossmint: crossmintSlice.reducer,
-    signup: signupModalSlice.reducer,
+    crossmintSlice,
+    modalSlice,
+    currentUserSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

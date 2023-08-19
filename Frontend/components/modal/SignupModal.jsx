@@ -12,10 +12,10 @@ import { useSelector } from 'react-redux';
 
 export default function SimpleRegistrationForm() {
   const [name, setName] = useState('');
-  const [signature, setSignature] = useState('');
   const [bio, setBio] = useState('');
+
   const { mintUser } = useCrossmint();
-  const { publicKey } = useWallet();
+  const publicKey = useSelector((state) => state.currentUser.publicKey);
 
   const [isAnimating, setIsAnimating] = useState(false);
   const modalRef = useRef(null);
