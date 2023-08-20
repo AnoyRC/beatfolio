@@ -16,6 +16,7 @@ app.use("/api/playlist", require("./routes/api/playlist"));
 app.use("/api/song", require("./routes/api/song"));
 app.use("/api/user", require("./routes/api/user"));
 app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/crossmint", require("./routes/api/crossmint"));
 
 const PORT = process.env.PORT || 5000;
 

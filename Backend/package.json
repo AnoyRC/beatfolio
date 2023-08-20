@@ -10,6 +10,7 @@
   "author": "Anoy Roy Chowdhury",
   "license": "MIT",
   "dependencies": {
+    "axios": "^1.4.0",
     "body-parser": "^1.20.2",
     "bs58": "^5.0.0",
     "config": "^3.3.9",
