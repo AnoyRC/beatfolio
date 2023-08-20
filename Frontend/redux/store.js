@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import crossmintSlice from './crossmintSlice';
-import modalSlice from './modalSlice';
-import currentUserSlice from './currentUserSlice';
+import crossmintSlice from "./crossmintSlice";
+import modalSlice from "./modalSlice";
+import currentUserSlice from "./currentUserSlice";
 
 export const store = configureStore({
   reducer: {
-    crossmintSlice,
+    crossmint: crossmintSlice,
     modalSlice,
     currentUserSlice,
   },
