@@ -16,7 +16,7 @@ export const fetchUser = createAsyncThunk(
   async (publicKey) => {
     await axios
       .get(
-        `https://dotcombackend/beatfolio/api/crossmint/fetch/user/${publicKey}`
+        `https://beatfolio.dotcombackend.me/api/crossmint/fetch/user/${publicKey}`
       )
       .then((res) => {
         return res.data;
@@ -29,7 +29,7 @@ export const fetchUser = createAsyncThunk(
 
 export const fetchSong = createAsyncThunk("song/fetchSong", async (id) => {
   await axios
-    .get(`https://dotcombackend/beatfolio/api/crossmint/fetch/song/${id}`)
+    .get(`https://beatfolio.dotcombackend.me/api/crossmint/fetch/song/${id}`)
     .then((res) => {
       return res.data;
     })
@@ -42,7 +42,7 @@ export const fetchAllUsers = createAsyncThunk(
   "user/fetchAllUsers",
   async () => {
     await axios
-      .get("https://dotcombackend/beatfolio/api/crossmint/user/all")
+      .get("https://beatfolio.dotcombackend.me/api/crossmint/user/all")
       .then((res) => {
         return res.data;
       })
@@ -56,7 +56,7 @@ export const fetchAllSongs = createAsyncThunk(
   "song/fetchAllSongs",
   async () => {
     await axios
-      .get("https://dotcombackend/beatfolio/api/crossmint/song/all")
+      .get("https://beatfolio.dotcombackend.me/api/crossmint/song/all")
       .then((res) => {
         return res.data;
       })
@@ -71,7 +71,7 @@ export const fetchUserSongs = createAsyncThunk(
   async (publicKey) => {
     await axios
       .get(
-        `https://dotcombackend/beatfolio/api/crossmint/song/user/${publicKey}`
+        `https://beatfolio.dotcombackend.me/api/crossmint/song/user/${publicKey}`
       )
       .then((res) => {
         return res.data;

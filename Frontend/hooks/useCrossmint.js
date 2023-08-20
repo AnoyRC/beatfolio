@@ -14,7 +14,7 @@ export default function useCrossmint() {
     });
 
     const res = await axios
-      .post(`https://dotcombackend/beatfolio/api/crossmint/mint/user`, body)
+      .post(`https://beatfolio.dotcombackend.me/api/crossmint/mint/user`, body)
       .catch((err) => {
         console.log(err);
         return null;
@@ -35,7 +35,7 @@ export default function useCrossmint() {
     });
 
     const res = await axios
-      .post(`https://dotcombackend/beatfolio/api/crossmint/mint/song`, body)
+      .post(`https://beatfolio.dotcombackend.me/api/crossmint/mint/song`, body)
       .catch((err) => {
         console.log(err);
         return null;
@@ -47,7 +47,7 @@ export default function useCrossmint() {
   const fetchUser = async (publicKey) => {
     await axios
       .get(
-        `https://dotcombackend/beatfolio/api/crossmint/fetch/user/${publicKey}`
+        `https://beatfolio.dotcombackend.me/api/crossmint/fetch/user/${publicKey}`
       )
       .then((res) => {
         return res.data;
@@ -59,7 +59,7 @@ export default function useCrossmint() {
 
   const fetchSong = async (id) => {
     await axios
-      .get(`https://dotcombackend/beatfolio/api/crossmint/fetch/song/${id}`)
+      .get(`https://beatfolio.dotcombackend.me/api/crossmint/fetch/song/${id}`)
       .then((res) => {
         return res.data;
       })
