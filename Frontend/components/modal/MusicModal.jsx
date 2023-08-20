@@ -3,7 +3,7 @@ import { ModalMusicPlayer } from '../MusicPlayer';
 
 const MusicModal = ({ songName, singerName, photo }) => {
   return (
-    <section className="z-40 w-full max-w-[1200px] overflow-hidden h-screen rounded-tl-3xl rounded-bl-3xl relative">
+    <section className="z-[90] w-full max-w-[1200px] overflow-hidden h-screen rounded-tl-3xl rounded-bl-3xl relative">
       <Image
         src="/modal/back-arrow.svg"
         width={18}
