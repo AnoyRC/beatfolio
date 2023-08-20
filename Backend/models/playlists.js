@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const PlaylistSchema = new mongoose.Schema({
   name: {
@@ -15,4 +15,4 @@ const PlaylistSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Playlist = mongoose.model("playlist", PlaylistSchema);
+module.exports = Playlist = mongoose.model('playlist', PlaylistSchema);

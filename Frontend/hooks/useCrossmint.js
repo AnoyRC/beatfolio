@@ -1,6 +1,6 @@
-import { useWallet } from "@solana/wallet-adapter-react";
-import axios from "axios";
-import bs58 from "bs58";
+import { useWallet } from '@solana/wallet-adapter-react';
+import axios from 'axios';
+import bs58 from 'bs58';
 
 export default function useCrossmint() {
   const { signMessage } = useWallet();
@@ -71,7 +71,7 @@ export default function useCrossmint() {
   const SignMessage = async () => {
     const signedMessage = await signMessage(
       new TextEncoder().encode(
-        "Welcome to BeatFolio. Please Sign the message to continue."
+        'Welcome to BeatFolio. Please Sign the message to continue.'
       )
     );
 

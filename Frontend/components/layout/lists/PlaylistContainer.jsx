@@ -1,13 +1,33 @@
-import PlaylistLists from './PlaylistLists';
+'use client';
+
+import { useState, useLayoutEffect } from 'react';
+
+import PlaylistLists from '@/components/layout/lists/PlaylistLists';
+import useAudius from '@/hooks/useAudius';
 
 const PlaylistContainer = () => {
+  const [playlists, setPlaylists] = useState([]);
+  const [undergroundTracks, setUndergroundTracks] = useState([]);
+
+  const { getTrendingPlaylist, getUndergroundTracks } = useAudius();
+
+  useLayoutEffect(() => {
+    getTrendingPlaylist().then((res) => {
+      setPlaylists(res.data.slice(0, 4));
+    });
+
+    getUndergroundTracks().then((res) => {
+      setUndergroundTracks(res.data);
+    });
+  }, []);
+
   return (
     <section className="my-10">
       <h3 className="text-2xl font-medium mb-4 text-gray-700">
         Trending Playlists
       </h3>
 
-      <PlaylistLists />
+      {playlists.length > 0 && <PlaylistLists playlists={playlists} />}
     </section>
   );
 };

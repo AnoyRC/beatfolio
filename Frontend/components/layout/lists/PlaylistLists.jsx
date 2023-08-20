@@ -1,46 +1,26 @@
 import PlaylistItem from './PlaylistItem';
 
 const PlaylistLists = ({ playlists }) => {
-  if (!playlists) {
-    playlists = [
-      {
-        name: 'Playlist Name',
-        images: '/song-photos/song-photo-1.png',
-        release_date: '23, June 2022',
-        tracks: '28',
-      },
-      {
-        name: 'Playlist Name',
-        images: '/song-photos/song-photo-2.png',
-        release_date: '05, Dec 2022',
-        tracks: '44',
-      },
-      {
-        name: 'Playlist Name',
-        images: '/song-photos/song-photo-3.png',
-        release_date: '23, Jan 2022',
-        tracks: '21',
-      },
-      {
-        name: 'Playlist Name',
-        images: '/song-photos/song-photo-4.png',
-        release_date: '29, Aug 2022',
-        tracks: '33',
-      },
-    ];
-  }
+  if (!playlists || playlists.length === 0)
+    return (
+      <div className="mt-10 text-gray-500 w-full text-center">
+        No Playlists Found
+      </div>
+    );
 
   return (
     <div className="m-2">
-      {playlists.map((playlist, index) => (
-        <PlaylistItem
-          key={index}
-          playlistName={playlist.name}
-          playlistImage={playlist.images}
-          playlistDate={playlist.release_date}
-          playlistTracks={playlist.tracks}
-        />
-      ))}
+      {playlists &&
+        playlists.map((playlist) => (
+          <PlaylistItem
+            key={playlist.id}
+            id={playlist.id}
+            playlistName={playlist.playlist_name}
+            playlistImage={playlist.artwork}
+            playlistDate={playlist.release_date}
+            playlistTracks={playlist.tracks}
+          />
+        ))}
     </div>
   );
 };

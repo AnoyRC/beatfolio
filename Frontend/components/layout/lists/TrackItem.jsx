@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
-const TrackItem = ({ trackImage, genre, singerName, trackName, trackDate }) => {
+const TrackItem = ({ trackImage, genre, singerName, trackName }) => {
   return (
     <section className="flex justify-between items-center hover:bg hover:bg-gray-50/5 rounded-lg mb-2 cursor-pointer p-2">
-      <div className="flex gap-5 items-center h-20">
+      <div className="flex gap-5 items-center h-20 w-3/4">
         <Image
           src={trackImage}
           alt={trackName}
@@ -14,12 +14,11 @@ const TrackItem = ({ trackImage, genre, singerName, trackName, trackDate }) => {
 
         <div>
           <h4 className="font-medium text-xl text-white">{trackName}</h4>
-          <h5 className="text-gray-500">{singerName}</h5>
+          <h5 className="text-gray-500">{singerName.name}</h5>
         </div>
       </div>
 
       <p className="text-gray-500">{genre}</p>
-      <p className="text-gray-500">{trackDate}</p>
 
       <Image src="/visit-arrow.svg" alt="Play" width={28} height={28} />
     </section>

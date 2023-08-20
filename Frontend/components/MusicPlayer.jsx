@@ -4,7 +4,7 @@ import MusicControls from './musicPlayer/MusicControls';
 
 const MusicPlayer = () => {
   return (
-    <section className="flex flex-1 items-center px-6 absolute right-0 bottom-0 w-full max-w-[1200px]">
+    <section className="flex flex-1 items-center px-6 sticky left-full bottom-0 w-full max-w-[1200px] bg-[#1c1c1c]/70 backdrop-blur z-[97] py-4">
       <PlaybackControls margin="mx-5" />
       <MusicDetails songPhoto="" songName="" singerName="" />
       <MusicControls isLiked="" endTime="" />

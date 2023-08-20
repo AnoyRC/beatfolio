@@ -1,46 +1,29 @@
+'use client';
+
 import Feed from './Feed';
 
 const FeedsContainer = ({ songs }) => {
-  if (!songs) {
-    songs = [
-      {
-        songImage: '/song-photos/song-photo-1.png',
-        isLiked: true,
-      },
-      {
-        songImage: '/song-photos/song-photo-2.png',
-        isLiked: false,
-      },
-      {
-        songImage: '/song-photos/song-photo-3.png',
-        isLiked: true,
-      },
-      {
-        songImage: '/song-photos/song-photo-4.png',
-        isLiked: false,
-      },
-      {
-        songImage: '/song-photos/song-photo-5.png',
-        isLiked: true,
-      },
-      {
-        songImage: '/song-photos/song-photo-6.png',
-        isLiked: false,
-      },
-    ];
-  }
-
   return (
     <section className="grid grid-cols-8">
       {songs.map((song, index) => (
         <Feed
-          key={song.id ? song.id : index}
+          key={song.id}
+          id={song.id}
+          songName={song.title}
+          songMood={song.mood}
+          songImage={
+            index % 3 === 0
+              ? song.artwork['1000x1000']
+              : song.artwork['480x480']
+          }
           isLiked={song.isLiked}
-          songImage={song.songImage}
+          genre={song.genre}
+          singer={song.user}
           number={index}
         />
       ))}
     </section>
   );
 };
+
 export default FeedsContainer;

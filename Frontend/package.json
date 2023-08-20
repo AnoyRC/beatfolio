@@ -5,7 +5,7 @@
   "author": "Gautam Raj",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev | npx local-ssl-proxy --source 3001 --target 3000",
+    "dev": "next dev",
     "build": "next build",
     "start": "HTTPS=true SSL_CRT_FILE=localhost.pem SSL_KEY_FILE=localhost-key.pem next start",
     "lint": "next lint"
