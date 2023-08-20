@@ -7,7 +7,7 @@ const SongDetails = ({ songName, singerName, genre }) => {
         </h3>
 
         <div>
-          <h4 className="text-xl mt-1">
+          <h4 className="text-xl mt-1 text-gray-500">
             {singerName ? singerName : 'Singer Name'}
           </h4>
 

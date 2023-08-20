@@ -10,12 +10,12 @@ const MusicProgressBar = ({ maxWidth, endTime }) => {
       >
         <div className={`bg-gray-700 w-full h-full`}></div>
         <div
-          style={{ width: '100px' }}
+          style={{ width: '0px' }}
           className="h-full bg-white z-10 rounded-full absolute top-0 left-0"
         ></div>
       </div>
 
-      <p className="text-gray-700">{endTime ? endTime : '4:00'}</p>
+      <p className="text-gray-700">{endTime ? endTime : '0:00'}</p>
     </div>
   );
 };

@@ -14,7 +14,7 @@ const SongItem = ({ songImage, singerName, songName, genre }) => {
 
       <SongDetails
         songName={songName ? songName : 'Song Name'}
-        singerName={singerName ? singerName : 'Singer Name'}
+        singerName={singerName ? singerName.name : 'Singer Name'}
         genre={genre ? genre : 'Genre'}
       />
     </section>

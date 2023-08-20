@@ -1,25 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { format } from 'date-fns';
-import { useMemo } from 'react';
 
-const ProfileAbout = ({
-  userCreatedAt,
-  userLocation,
-  userName,
-  userBio,
-  userFollowers,
-  userFollowing,
-}) => {
-  const createdAt = useMemo(() => {
-    if (userCreatedAt) {
-      return format(new Date(userCreatedAt), 'MMMM yyyy');
-    }
-  }, [userCreatedAt]);
-
+const ProfileAbout = ({ userName, userBio, userFollowers, userFollowing }) => {
   return (
-    <section className="px-4 mb-10">
+    <section className="px-4 mb-10 w-full">
       <div className="flex gap-5 justify-end p-2 w-fit ml-auto md:w-full">
         {/* {currentUserData?.user?.email === userEmail ? (
           <div></div>
@@ -33,15 +18,15 @@ const ProfileAbout = ({
         {/* )} */}
       </div>
 
-      <div className="mt-8">
+      <div className="my-4">
         <div className="flex flex-col">
           <p className="text-2xl font-semibold text-rainbow w-fit">
-            {userName ? 'userName' : 'User Name'}
+            {userName ? userName : 'User Name'}
           </p>
         </div>
       </div>
 
-      {userBio && <p className="mb-4">{userBio}</p>}
+      {userBio && <pre className="mb-4 w-full">{userBio}</pre>}
 
       <div className="flex items-center mt-4 gap-6">
         <div className="flex items-center gap-1">

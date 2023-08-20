@@ -3,7 +3,6 @@
 import Feed from './Feed';
 
 const FeedsContainer = ({ songs }) => {
-  console.log(songs[0]);
   return (
     <section className="grid grid-cols-8">
       {songs.map((song, index) => (
@@ -26,4 +25,5 @@ const FeedsContainer = ({ songs }) => {
     </section>
   );
 };
+
 export default FeedsContainer;

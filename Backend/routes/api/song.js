@@ -1,11 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const auth = require("../../middleware/auth");
+const auth = require('../../middleware/auth');
 
-const Song = require("../../models/songs");
-const User = require("../../models/users");
+const Song = require('../../models/songs');
+const User = require('../../models/users');
 
-router.post("/like/:songId", auth, async (req, res) => {
+router.post('/like/:songId', auth, async (req, res) => {
   try {
     const selectedSong = Song.findOne({ songId: req.params.songId });
 
@@ -45,11 +45,11 @@ router.post("/like/:songId", auth, async (req, res) => {
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send('Server error');
   }
 });
 
-router.post("/unlike/:songId", auth, async (req, res) => {
+router.post('/unlike/:songId', auth, async (req, res) => {
   try {
     const selectedSong = Song.findOne({ songId: req.params.songId });
 
@@ -89,11 +89,11 @@ router.post("/unlike/:songId", auth, async (req, res) => {
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send('Server error');
   }
 });
 
-router.get("/likes/:songId", async (req, res) => {
+router.get('/likes/:songId', async (req, res) => {
   try {
     const selectedSong = Song.findOne({ songId: req.params.songId });
 
@@ -104,7 +104,7 @@ router.get("/likes/:songId", async (req, res) => {
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    res.status(500).send('Server error');
   }
 });
 

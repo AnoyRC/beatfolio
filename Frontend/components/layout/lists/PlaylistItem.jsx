@@ -28,11 +28,11 @@ const PlaylistItem = ({ id, playlistName, playlistImage }) => {
     >
       <div className="flex gap-5 items-center h-20 w-1/2">
         <Image
-          src={playlistImage['150x150']}
+          src={playlistImage && playlistImage['150x150']}
           alt={playlistName}
           width={80}
           height={80}
-          className="h-20 w-20 rounded-md"
+          className="h-20 w-20 rounded-md bg-white"
         />
 
         <h4 className="font-medium text-xl text-white">{playlistName}</h4>

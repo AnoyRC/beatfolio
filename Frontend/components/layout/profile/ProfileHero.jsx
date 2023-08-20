@@ -1,11 +1,17 @@
 import Image from 'next/image';
 
 const ProfileHero = ({ coverImage, userId, profileImage }) => {
+  console.log(coverImage);
   return (
     <section>
       <div className="bg-gray-300 h-44 relative">
         {coverImage && (
-          <Image src={coverImage} fill alt="Cover Image" objectFit="cover" />
+          <Image
+            src={coverImage ? coverImage : ''}
+            fill
+            alt="Cover Image"
+            objectFit="cover"
+          />
         )}
 
         <div className="absolute -bottom-16 left-4">

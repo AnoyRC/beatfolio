@@ -9,11 +9,11 @@ import {
 } from '@material-tailwind/react';
 import { useState } from 'react';
 
-const UnderlineTabs = ({ data, value }) => {
+const UnderlineTabs = ({ data, value, margin }) => {
   const [activeTab, setActiveTab] = useState(value);
 
   return (
-    <Tabs value={activeTab}>
+    <Tabs value={activeTab} className={margin}>
       <TabsHeader
         className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
         indicatorProps={{
