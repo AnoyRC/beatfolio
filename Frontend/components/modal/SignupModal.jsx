@@ -1,12 +1,9 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import axios from 'axios';
 import { Card, Input, Button, Textarea } from '@material-tailwind/react';
-import { toast } from 'react-hot-toast';
 
 import useCrossmint from '@/hooks/useCrossmint';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { saveProfileToIPFS } from '@/hooks/saveToIPFS';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -39,16 +36,16 @@ export default function SimpleRegistrationForm() {
 
     const image = await saveProfileToIPFS(e.target[0].files[0]);
 
-    const userData = await mintUser(
-      {
-        name,
-        description: bio,
-        image,
-      },
-      publicKey.toString()
-    );
+    // const userData = await mintUser(
+    //   {
+    //     name,
+    //     description: bio,
+    //     image,
+    //   },
+    //   publicKey.toString()
+    // );
 
-    if (userData) dispatch(closeSignupModal());
+    // if (userData) dispatch(closeSignupModal());
   };
 
   return (

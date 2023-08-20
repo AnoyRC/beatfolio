@@ -1,15 +1,15 @@
-const axios = require("axios");
-const express = require("express");
+const axios = require('axios');
+const express = require('express');
 const router = express.Router();
-const { check, validationResult } = require("express-validator");
+const { check, validationResult } = require('express-validator');
 
 router.post(
-  "/mint/user",
+  '/mint/user',
   [
-    check("name", "Name is required").not().isEmpty(),
-    check("description", "Description is required").not().isEmpty(),
-    check("image", "Image is required").not().isEmpty(),
-    check("address", "Public Key is required").not().isEmpty(),
+    check('name', 'Name is required').not().isEmpty(),
+    check('description', 'Description is required').not().isEmpty(),
+    check('image', 'Image is required').not().isEmpty(),
+    check('address', 'Public Key is required').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -24,10 +24,10 @@ router.post(
 
     const config = {
       headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+        accept: 'application/json',
+        'content-type': 'application/json',
+        'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+        'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
       },
     };
 
@@ -53,21 +53,21 @@ router.post(
     if (response) {
       return res.json(response.data);
     } else {
-      return res.status(500).send("Server error");
+      return res.status(500).send('Server error');
     }
   }
 );
 
 router.post(
-  "/mint/song",
+  '/mint/song',
   [
-    check("name", "Name is required").not().isEmpty(),
-    check("description", "Description is required").not().isEmpty(),
-    check("image", "Image is required").not().isEmpty(),
-    check("songLink", "Song Link is required").not().isEmpty(),
-    check("genre", "Genre is required").not().isEmpty(),
-    check("mood", "Mood is required").not().isEmpty(),
-    check("address", "Public Key is required").not().isEmpty(),
+    check('name', 'Name is required').not().isEmpty(),
+    check('description', 'Description is required').not().isEmpty(),
+    check('image', 'Image is required').not().isEmpty(),
+    check('songLink', 'Song Link is required').not().isEmpty(),
+    check('genre', 'Genre is required').not().isEmpty(),
+    check('mood', 'Mood is required').not().isEmpty(),
+    check('address', 'Public Key is required').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -83,10 +83,10 @@ router.post(
 
     const config = {
       headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+        accept: 'application/json',
+        'content-type': 'application/json',
+        'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+        'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
       },
     };
 
@@ -98,11 +98,11 @@ router.post(
         image: image,
         attributes: [
           {
-            trait_type: "Song Link",
+            trait_type: 'Song Link',
             value: songLink,
           },
-          { trait_type: "Genre", value: genre },
-          { trait_type: "Mood", value: mood },
+          { trait_type: 'Genre', value: genre },
+          { trait_type: 'Mood', value: mood },
         ],
       },
     });
@@ -120,19 +120,20 @@ router.post(
     if (response) {
       return res.json(response.data);
     } else {
-      return res.status(500).send("Server error");
+      return res.status(500).send('Server error');
     }
   }
 );
 
-router.get("/fetch/user/:address", async (req, res) => {
+router.get('/fetch/user/:address', async (req, res) => {
   const config = {
     headers: {
-      "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-      "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+      'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+      'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
     },
   };
 
+  await axios;
   await axios
     .get(
       `https://staging.crossmint.com/api/2022-06-09/collections/0e249985-9d8e-443a-8f17-32b4f9e12592/nfts?page=1&perPage=50`,
@@ -142,23 +143,24 @@ router.get("/fetch/user/:address", async (req, res) => {
       response.data.forEach((user) => {
         if (user.id === req.params.address) {
           return res.json(user);
+          return res.json(user);
         }
       });
     })
     .catch((err) => {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     });
 });
 
-router.get("/fetch/song/:id", async (req, res) => {
+router.get('/fetch/song/:id', async (req, res) => {
   const config = {
     headers: {
-      "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-      "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+      'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+      'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
     },
   };
 
-  axios
+  await axios
     .get(
       `https://staging.crossmint.com/api/2022-06-09/collections/c3d92820-7264-443c-a859-4857d6832c28/nfts?page=1&perPage=50`,
       config
@@ -167,19 +169,20 @@ router.get("/fetch/song/:id", async (req, res) => {
       response.data.forEach((song) => {
         if (song.id === req.params.id) {
           return res.json(song);
+          return res.json(song);
         }
       });
     })
     .catch((err) => {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     });
 });
 
-router.get("/user/all", async (req, res) => {
+router.get('/user/all', async (req, res) => {
   const config = {
     headers: {
-      "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-      "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+      'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+      'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
     },
   };
 
@@ -190,17 +193,18 @@ router.get("/user/all", async (req, res) => {
     )
     .then((response) => {
       return res.json(response.data);
+      return res.json(response.data);
     })
     .catch((err) => {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     });
 });
 
-router.get("/song/all", async (req, res) => {
+router.get('/song/all', async (req, res) => {
   const config = {
     headers: {
-      "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-      "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+      'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+      'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
     },
   };
 
@@ -211,17 +215,18 @@ router.get("/song/all", async (req, res) => {
     )
     .then((response) => {
       return res.json(response.data);
+      return res.json(response.data);
     })
     .catch((err) => {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     });
 });
 
-router.get("/song/user/:address", async (req, res) => {
+router.get('/song/user/:address', async (req, res) => {
   const config = {
     headers: {
-      "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-      "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
+      'x-client-secret': 'sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821',
+      'x-project-id': '7f12ef92-e40f-43c9-af10-d4d585656d65',
     },
   };
 
@@ -235,9 +240,10 @@ router.get("/song/user/:address", async (req, res) => {
         return song.onChain.owner === publicKey;
       });
       return res.json(filter);
+      return res.json(filter);
     })
     .catch((err) => {
-      res.status(500).send(err);
+      return res.status(500).send(err);
     });
 });
 

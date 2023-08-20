@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import useCrossmint from '@/hooks/useCrossmint';
 
-import { fetchUser } from '@/redux/crossmintSlice';
 import { updatePublicKey, updateUser } from '@/redux/currentUserSlice';
 
 import Avatar from '../profile/Avatar';
@@ -16,30 +15,28 @@ import { openSignupModal } from '@/redux/modalSlice';
 
 const WalletBtn = () => {
   const dispatch = useDispatch();
-  const { connected } = useWallet();
-
-  const [publicKey, setPublicKey] = useState(
-    useSelector((state) => state.currentUserSlice.publicKey)
-  );
-
-  const currentUser = dispatch(fetchUser(publicKey));
-
-  if (currentUser) {
-    dispatch(
-      updateUser({
-        name: currentUser.name,
-        description: currentUser.description,
-        image: currentUser.image,
-      })
-    );
-  }
-
+  const { connected, publicKey } = useWallet();
   const { SignMessage } = useCrossmint();
+  const [currentUser, setCurrentUser] = useState();
+
+  const getUser = async (publicKey) => {
+    const { data } = await axios.get(
+      `http://localhost:8081/api/crossmint/fetch/user/${publicKey}`
+    );
+    // console.log(data);
+    setCurrentUser(data);
+    // console.log(currentUser);
+  };
 
   const handleSignup = async () => {
+    getUser(publicKey);
     const signature = await SignMessage();
 
-    dispatch(openSignupModal());
+    if (!currentUser) {
+      dispatch(openSignupModal());
+    } else {
+      // console.log('user already exists');
+    }
 
     await axios.post('http://localhost:8081/api/auth', {
       signature: signature,
@@ -50,9 +47,20 @@ const WalletBtn = () => {
   useEffect(() => {
     if (publicKey) {
       dispatch(updatePublicKey(publicKey.toString()));
-      setPublicKey(publicKey.toString());
     }
-  }, [publicKey]);
+
+    if (currentUser) {
+      dispatch(
+        updateUser({
+          name: currentUser.metadata.name,
+          description: currentUser.metadata.description,
+          image: currentUser.metadata.image,
+        })
+      );
+    }
+
+    // console.log(currentUser);
+  }, [publicKey, currentUser]);
 
   const WalletMultiButtonDynamic = dynamic(
     async () =>
@@ -63,20 +71,14 @@ const WalletBtn = () => {
   return (
     <>
       {connected ? (
-        currentUser.id ? (
-          <>
-            <Avatar profilePhoto="" name="" />
-          </>
-        ) : (
-          <>
-            <button
-              className="px-6 py-3 btn-gradiant rounded-lg cursor-pointer font-bold hover:scale-105 active:scale-95 transition-transform duration-150"
-              onClick={handleSignup}
-            >
-              Sign Up
-            </button>
-          </>
-        )
+        <>
+          <button
+            className="px-6 py-3 btn-gradiant rounded-lg cursor-pointer font-bold hover:scale-105 active:scale-95 transition-transform duration-150"
+            onClick={handleSignup}
+          >
+            Sign Up
+          </button>
+        </>
       ) : (
         <>
           <WalletMultiButtonDynamic />

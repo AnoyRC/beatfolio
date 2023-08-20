@@ -6,11 +6,12 @@ import Like from '../../ui/Like';
 import PlayerMenu from '../../musicPlayer/PlayerMenu';
 
 const Feed = ({
+  id,
+  songName,
+  songMood,
   songImage,
   isLiked,
   genre,
-  singerImage,
-  songName,
   singer,
   number,
 }) => {
@@ -30,10 +31,11 @@ const Feed = ({
 
       <div className="flex justify-between items-center px-6 py-9">
         <FeedDetails
-          singerImage={singerImage}
+          id={singer.id}
+          singerImage={singer.profile_picture['150x150']}
           songName={songName}
-          singerName={singer}
-          genre={genre}
+          singerName={singer.name}
+          genre={`${genre} / ${songMood}`}
         />
 
         <div className="flex z-10 mr-3">
