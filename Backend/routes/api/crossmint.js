@@ -133,7 +133,7 @@ router.get("/fetch/user/:address", async (req, res) => {
     },
   };
 
-  axios
+  await axios
     .get(
       `https://staging.crossmint.com/api/2022-06-09/collections/0e249985-9d8e-443a-8f17-32b4f9e12592/nfts?page=1&perPage=50`,
       config
@@ -141,11 +141,9 @@ router.get("/fetch/user/:address", async (req, res) => {
     .then((response) => {
       response.data.forEach((user) => {
         if (user.id === req.params.address) {
-          res.json(user);
+          return res.json(user);
         }
       });
-
-      res.json({ error: "User not found" });
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -168,10 +166,9 @@ router.get("/fetch/song/:id", async (req, res) => {
     .then((response) => {
       response.data.forEach((song) => {
         if (song.id === req.params.id) {
-          res.json(song);
+          return res.json(song);
         }
       });
-      res.json({ error: "Song not found" });
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -192,7 +189,7 @@ router.get("/user/all", async (req, res) => {
       config
     )
     .then((response) => {
-      res.json(response.data);
+      return res.json(response.data);
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -213,7 +210,7 @@ router.get("/song/all", async (req, res) => {
       config
     )
     .then((response) => {
-      res.json(response.data);
+      return res.json(response.data);
     })
     .catch((err) => {
       res.status(500).send(err);
@@ -237,7 +234,7 @@ router.get("/song/user/:address", async (req, res) => {
       const filter = response.data.filter((song) => {
         return song.onChain.owner === publicKey;
       });
-      res.json(filter);
+      return res.json(filter);
     })
     .catch((err) => {
       res.status(500).send(err);

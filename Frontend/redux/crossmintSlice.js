@@ -14,76 +14,40 @@ const initialState = {
 export const fetchUser = createAsyncThunk(
   "user/fetchUser",
   async (publicKey) => {
-    const config = {
-      headers: {
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
-      },
-    };
-
-    axios
+    await axios
       .get(
-        `https://staging.crossmint.com/api/2022-06-09/collections/0e249985-9d8e-443a-8f17-32b4f9e12592/nfts?page=1&perPage=50`,
-        config
+        `https://dotcombackend/beatfolio/api/crossmint/fetch/user/${publicKey}`
       )
       .then((res) => {
-        res.data.forEach((user) => {
-          if (user.id === publicKey) {
-            return user;
-          }
-        });
+        return res.data;
       })
       .catch((err) => {
-        return null;
+        return err;
       });
   }
 );
 
 export const fetchSong = createAsyncThunk("song/fetchSong", async (id) => {
-  const config = {
-    headers: {
-      "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-      "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
-    },
-  };
-
-  axios
-    .get(
-      "https://staging.crossmint.com/api/2022-06-09/collections/c3d92820-7264-443c-a859-4857d6832c28/nfts?page=1&perPage=50",
-      config
-    )
+  await axios
+    .get(`https://dotcombackend/beatfolio/api/crossmint/fetch/song/${id}`)
     .then((res) => {
-      res.data.forEach((song) => {
-        if (song.id === id) {
-          return song;
-        }
-      });
+      return res.data;
     })
     .catch((err) => {
-      return null;
+      return err;
     });
 });
 
 export const fetchAllUsers = createAsyncThunk(
   "user/fetchAllUsers",
   async () => {
-    const config = {
-      headers: {
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
-      },
-    };
-
-    axios
-      .get(
-        "https://staging.crossmint.com/api/2022-06-09/collections/0e249985-9d8e-443a-8f17-32b4f9e12592/nfts?page=1&perPage=50",
-        config
-      )
+    await axios
+      .get("https://dotcombackend/beatfolio/api/crossmint/user/all")
       .then((res) => {
         return res.data;
       })
       .catch((err) => {
-        return null;
+        return err;
       });
   }
 );
@@ -91,23 +55,13 @@ export const fetchAllUsers = createAsyncThunk(
 export const fetchAllSongs = createAsyncThunk(
   "song/fetchAllSongs",
   async () => {
-    const config = {
-      headers: {
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
-      },
-    };
-
-    axios
-      .get(
-        "https://staging.crossmint.com/api/2022-06-09/collections/c3d92820-7264-443c-a859-4857d6832c28/nfts?page=1&perPage=50",
-        config
-      )
+    await axios
+      .get("https://dotcombackend/beatfolio/api/crossmint/song/all")
       .then((res) => {
         return res.data;
       })
       .catch((err) => {
-        return null;
+        return err;
       });
   }
 );
@@ -115,25 +69,15 @@ export const fetchAllSongs = createAsyncThunk(
 export const fetchUserSongs = createAsyncThunk(
   "song/fetchUserSongs",
   async (publicKey) => {
-    const config = {
-      headers: {
-        "x-client-secret": "sk_test.2d726b3c.e2b6f527018e88ad299fbfc7c39a1821",
-        "x-project-id": "7f12ef92-e40f-43c9-af10-d4d585656d65",
-      },
-    };
-
-    axios
+    await axios
       .get(
-        "https://staging.crossmint.com/api/2022-06-09/collections/c3d92820-7264-443c-a859-4857d6832c28/nfts?page=1&perPage=50",
-        config
+        `https://dotcombackend/beatfolio/api/crossmint/song/user/${publicKey}`
       )
       .then((res) => {
-        return res.data.filter((song) => {
-          return song.onChain.owner === publicKey;
-        });
+        return res.data;
       })
       .catch((err) => {
-        return null;
+        return err;
       });
   }
 );
