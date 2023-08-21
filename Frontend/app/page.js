@@ -10,12 +10,10 @@ import About from '@/components/layout/home/About';
 import Ripple from '@/components/layout/home/Ripple';
 import SignUp from '@/components/layout/home/SignUp';
 import Footer from '@/components/layout/home/Footer';
-import MusicModal from '@/components/modal/MusicModal';
 
 export default function Home() {
   return (
     <section className="h-screen overflow-y-auto no-scrollbar no-scrollbar::-webkit-scrollbar max-w-7xl relative mx-auto">
-      <MusicModal />
       <HomeNav />
 
       <Header />

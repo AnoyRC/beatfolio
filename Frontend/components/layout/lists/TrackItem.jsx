@@ -1,13 +1,21 @@
-import { fetchSong } from "@/redux/crossmintSlice";
-import Image from "next/image";
-import { useDispatch } from "react-redux";
+import Image from 'next/image';
+import { useDispatch } from 'react-redux';
+
+import { fetchSong } from '@/redux/crossmintSlice';
+import { openMusicModal } from '@/redux/modalSlice';
 
 const TrackItem = ({ trackImage, genre, singerName, trackName, id }) => {
   const dispatch = useDispatch();
+
+  const handleSongClick = () => {
+    dispatch(fetchSong(id));
+    dispatch(openMusicModal());
+  };
+
   return (
     <section
       className="flex justify-between items-center hover:bg hover:bg-gray-50/5 rounded-lg mb-2 cursor-pointer p-2"
-      onClick={() => dispatch(fetchSong(id))}
+      onClick={handleSongClick}
     >
       <div className="flex gap-5 items-center h-20 w-3/4">
         <Image
