@@ -63,7 +63,10 @@ const WalletBtn = () => {
     <>
       {connected ? (
         currentUser ? (
-          <Avatar profilePhoto={""} name={currentUser.metadata.name} />
+          <Avatar
+            profilePhoto={currentUser.metadata.image}
+            name={currentUser.metadata.name}
+          />
         ) : (
           <button
             className="px-6 py-3 btn-gradiant rounded-lg cursor-pointer font-bold hover:scale-105 active:scale-95 transition-transform duration-150"

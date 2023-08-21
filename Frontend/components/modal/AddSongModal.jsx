@@ -1,23 +1,24 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Image from 'next/image';
-import axios from 'axios';
-import { Card, Input, Button, Textarea } from '@material-tailwind/react';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { closeUploadModal } from '@/redux/modalSlice';
+import { useState } from "react";
+import Image from "next/image";
+import axios from "axios";
+import { Card, Input, Button, Textarea } from "@material-tailwind/react";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useDispatch, useSelector } from "react-redux";
+import { closeUploadModal } from "@/redux/modalSlice";
 
-import useCrossmint from '@/hooks/useCrossmint';
-import { saveSongToIPFS, saveProfileToIPFS } from '@/hooks/saveToIPFS';
+import useCrossmint from "@/hooks/useCrossmint";
+import { saveSongToIPFS, saveProfileToIPFS } from "@/hooks/saveToIPFS";
 
 export default function AddSongModal() {
   const isOpen = useSelector((state) => state.modalSlice.isUploadOpen);
   const dispatch = useDispatch();
 
-  const [songTitle, setSongTitle] = useState('');
-  const [songGenre, setSongGenre] = useState('');
-  const [songMood, setSongMood] = useState('');
+  const [songTitle, setSongTitle] = useState("");
+  const [songGenre, setSongGenre] = useState("");
+  const [songMood, setSongMood] = useState("");
+  const { publicKey } = useWallet();
 
   const { mintSong } = useCrossmint();
   const { fetchUser } = useCrossmint();
@@ -31,17 +32,29 @@ export default function AddSongModal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const image = await saveProfileToIPFS(e.target[0].files[0]);
+      const song = await saveSongToIPFS(e.target[1].files[0]);
 
-    const image = saveProfileToIPFS(e.target[0].files[0]);
-    const song = saveSongToIPFS(e.target[1].files[0]);
+      const res = await mintSong(
+        {
+          name: songTitle,
+          description: "A song uploaded on Beatfolio",
+          image: image,
+          songLink: song,
+          genre: songGenre,
+          mood: songMood,
+        },
+        publicKey
+      );
 
-    await mintSong({
-      name: songTitle,
-      genre: songGenre,
-      mood: songMood,
-      image: image,
-      song: song,
-    });
+      console.log(res);
+      if (res) {
+        dispatch(closeUploadModal());
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

@@ -24,7 +24,7 @@ export default function useCrossmint() {
   };
 
   const mintSong = async (song, publicKey) => {
-    const body = JSON.stringify({
+    const body = {
       name: song.name,
       description: song.description,
       image: `https://${song.image}.ipfs.w3s.link`,
@@ -32,7 +32,7 @@ export default function useCrossmint() {
       genre: song.genre,
       mood: song.mood,
       address: publicKey,
-    });
+    };
 
     const res = await axios
       .post(`https://beatfolio.dotcombackend.me/api/crossmint/mint/song`, body)
