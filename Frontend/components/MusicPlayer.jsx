@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import PlaybackControls from './musicPlayer/PlaybackControls';
-import MusicDetails from './musicPlayer/MusicDetails';
-import MusicControls from './musicPlayer/MusicControls';
-import { useRef, useState } from 'react';
+import PlaybackControls from "./musicPlayer/PlaybackControls";
+import MusicDetails from "./musicPlayer/MusicDetails";
+import MusicControls from "./musicPlayer/MusicControls";
+import { useRef, useState } from "react";
 
 const MusicPlayer = () => {
   return (
@@ -15,7 +15,7 @@ const MusicPlayer = () => {
   );
 };
 
-const ModalMusicPlayer = ({ currentSong, handleRandomSong, source }) => {
+const ModalMusicPlayer = ({ currentSong, source }) => {
   const songPlayerRef = useRef(null);
   const progressBarRef = useRef(null);
   const playPauseBtnRef = useRef(null);
@@ -39,7 +39,6 @@ const ModalMusicPlayer = ({ currentSong, handleRandomSong, source }) => {
   return (
     <section className="flex flex-1 items-center px-7 py-3 w-full max-w-[1096px] rounded-2xl backdrop-blur-sm bg-gray-900/50 mx-auto">
       <PlaybackControls
-        handleRandomSong={handleRandomSong}
         isPlaying={isPlaying}
         handleSongControl={playPause}
         playPauseBtnRef={playPauseBtnRef}
@@ -48,8 +47,8 @@ const ModalMusicPlayer = ({ currentSong, handleRandomSong, source }) => {
       {currentSong && (
         <MusicDetails
           id={currentSong.data.user.id}
-          songPhoto={currentSong.data.user.profile_picture['150x150']}
-          songName={currentSong.data.title.split('(')[0]}
+          songPhoto={currentSong.data.user.profile_picture["150x150"]}
+          songName={currentSong.data.title.split("(")[0]}
           singerName={currentSong.data.user.name}
         />
       )}
