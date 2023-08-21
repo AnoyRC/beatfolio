@@ -42,7 +42,7 @@ const Avatar = ({ profilePhoto, name }) => {
           <AvatarComponent
             size="md"
             alt="avatar"
-            src="/profile/profile-image.png"
+            src={profilePhoto ? profilePhoto : "/profile/avatar.svg"}
             className="border border-purple-500 shadow-xl shadow-purple-900/20 ring-4 ring-purple-500/30"
           />
           <p className="text-white font-normal text-xl">
