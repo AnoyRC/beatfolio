@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import PlaybackControls from "./musicPlayer/PlaybackControls";
-import MusicDetails from "./musicPlayer/MusicDetails";
-import MusicControls from "./musicPlayer/MusicControls";
-import { useRef, useState } from "react";
+import PlaybackControls from './musicPlayer/PlaybackControls';
+import MusicDetails from './musicPlayer/MusicDetails';
+import MusicControls from './musicPlayer/MusicControls';
+import { useRef, useState } from 'react';
 
 const MusicPlayer = () => {
   return (
@@ -15,15 +15,16 @@ const MusicPlayer = () => {
   );
 };
 
-const ModalMusicPlayer = ({ currentSong, source }) => {
+const ModalMusicPlayer = ({ isLoading, currentSong, source }) => {
+  console.log(currentSong);
   const songPlayerRef = useRef(null);
   const progressBarRef = useRef(null);
   const playPauseBtnRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   songPlayerRef.onloadedmetadata = function () {
-    progressBarRef.current.max = songPlayerRef.current.duration;
-    progressBarRef.current.value = songPlayerRef.current.currentTime;
+    progressBarRef.current.max = currentSong.data.duration;
+    progressBarRef.current.value = 0;
   };
 
   const playPause = () => {
@@ -39,6 +40,7 @@ const ModalMusicPlayer = ({ currentSong, source }) => {
   return (
     <section className="flex flex-1 items-center px-7 py-3 w-full max-w-[1096px] rounded-2xl backdrop-blur-sm bg-gray-900/50 mx-auto">
       <PlaybackControls
+        isLoading={isLoading}
         isPlaying={isPlaying}
         handleSongControl={playPause}
         playPauseBtnRef={playPauseBtnRef}
@@ -47,13 +49,15 @@ const ModalMusicPlayer = ({ currentSong, source }) => {
       {currentSong && (
         <MusicDetails
           id={currentSong.data.user.id}
-          songPhoto={currentSong.data.user.profile_picture["150x150"]}
-          songName={currentSong.data.title.split("(")[0]}
+          songPhoto={currentSong.data.user.profile_picture['150x150']}
+          songName={currentSong.data.title.split('(')[0]}
           singerName={currentSong.data.user.name}
         />
       )}
       {source && (
         <MusicControls
+          endTime={currentSong.data.duration}
+          isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
           progressBarRef={progressBarRef}
           songPlayerRef={songPlayerRef}
