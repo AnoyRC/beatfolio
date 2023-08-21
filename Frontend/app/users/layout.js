@@ -530,7 +530,7 @@ export default function UsersLayout({ children }) {
         </section>
       </main>
 
-      <MusicPlayer />
+      {/* <MusicPlayer /> */}
     </>
   );
 }

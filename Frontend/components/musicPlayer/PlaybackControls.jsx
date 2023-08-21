@@ -2,10 +2,16 @@ import Image from 'next/image';
 
 import PlayBtn from '../ui/PlayBtn';
 
-const PlaybackControls = ({ margin }) => {
+const PlaybackControls = ({
+  handleRandomSong,
+  isPlaying,
+  handleSongControl,
+  playPauseBtnRef,
+  margin,
+}) => {
   return (
     <div className="flex items-center mr-10">
-      <button>
+      <button onClick={handleRandomSong}>
         <Image
           src="/music-player/previous.svg"
           width={28}
@@ -14,9 +20,14 @@ const PlaybackControls = ({ margin }) => {
         />
       </button>
 
-      <PlayBtn style={`border-none bg-gray-700 ${margin}`} />
+      <PlayBtn
+        isPlaying={isPlaying}
+        handleSongControl={handleSongControl}
+        style={`border-none bg-gray-700 ${margin}`}
+        playPauseBtnRef={playPauseBtnRef}
+      />
 
-      <button>
+      <button onClick={handleRandomSong}>
         <Image
           src="/music-player/next.svg"
           width={28}

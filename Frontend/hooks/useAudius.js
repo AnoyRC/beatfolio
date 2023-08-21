@@ -120,7 +120,7 @@ export default function useAudius() {
 
   const getTrack = async (id) => {
     const res = await fetch(
-      `https://dn2.monophonic.digital/v1/tracks/${id}?app_name=EXAMPLEAPP`
+      `https://audius-metadata-4.figment.io/v1/tracks/${id}?app_name=EXAMPLEAPP`
     );
 
     return res.json();
@@ -156,18 +156,11 @@ export default function useAudius() {
   };
 
   const streamTrack = async (id) => {
-    fetch(
-      `https://dn2.monophonic.digital/v1/tracks/${id}/stream?app_name=EXAMPLEAPP`,
-      {
-        method: 'GET',
-      }
-    )
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (body) {
-        console.log(body);
-      });
+    const res = await fetch(
+      `https://blockchange-audius-discovery-02.bdnodes.net/v1/tracks/D7KyD/stream?app_name=EXAMPLEAPP`
+    );
+
+    return res.json();
   };
 
   const searchTrack = async (query) => {

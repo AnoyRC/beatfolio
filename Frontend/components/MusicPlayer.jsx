@@ -1,6 +1,9 @@
+'use client';
+
 import PlaybackControls from './musicPlayer/PlaybackControls';
 import MusicDetails from './musicPlayer/MusicDetails';
 import MusicControls from './musicPlayer/MusicControls';
+import { useRef, useState } from 'react';
 
 const MusicPlayer = () => {
   return (
@@ -12,13 +15,50 @@ const MusicPlayer = () => {
   );
 };
 
-const ModalMusicPlayer = () => {
+const ModalMusicPlayer = ({ setNextTrack, handleRandomSong, source }) => {
+  const songPlayerRef = useRef(null);
+  const progressBarRef = useRef(null);
+  const playPauseBtnRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  songPlayerRef.onloadedmetadata = function () {
+    progressBarRef.current.max = songPlayerRef.current.duration;
+    progressBarRef.current.value = songPlayerRef.current.currentTime;
+  };
+
+  const playPause = () => {
+    if (songPlayerRef.current.paused) {
+      songPlayerRef.current.play();
+      setIsPlaying(true);
+    } else {
+      songPlayerRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
+
   return (
-    <section className="flex flex-1 items-center px-7 py-3 w-full max-w-[1096px] rounded-2xl backdrop-blur-sm bg-gray-900/50 mx-auto">
-      <PlaybackControls margin="mx-4" />
-      <MusicDetails songPhoto="" songName="" singerName="" />
-      <MusicControls endTime="" />
-    </section>
+    <>
+      <section className="flex flex-1 items-center px-7 py-3 w-full max-w-[1096px] rounded-2xl backdrop-blur-sm bg-gray-900/50 mx-auto">
+        <PlaybackControls
+          handleRandomSong={handleRandomSong}
+          isPlaying={isPlaying}
+          handleSongControl={playPause}
+          playPauseBtnRef={playPauseBtnRef}
+          margin="mx-4"
+        />
+
+        <MusicDetails songPhoto="" songName="" singerName="" />
+
+        {source && (
+          <MusicControls
+            setIsPlaying={setIsPlaying}
+            progressBarRef={progressBarRef}
+            songPlayerRef={songPlayerRef}
+            source={source}
+          />
+        )}
+      </section>
+    </>
   );
 };
 

@@ -3,15 +3,13 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-const PlayBtn = ({ style }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const togglePlay = () => {
-    setIsPlaying((prevState) => !prevState);
-  };
-
+const PlayBtn = ({ isPlaying, handleSongControl, playPauseBtnRef, style }) => {
   return (
-    <button className={`p-3 border rounded-full ${style}`} onClick={togglePlay}>
+    <button
+      className={`p-3 border rounded-full ${style}`}
+      onClick={handleSongControl}
+      ref={playPauseBtnRef}
+    >
       {isPlaying ? (
         <Image
           src="/music-player/pause.svg"
