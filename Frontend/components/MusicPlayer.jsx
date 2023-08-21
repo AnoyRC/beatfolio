@@ -15,7 +15,7 @@ const MusicPlayer = () => {
   );
 };
 
-const ModalMusicPlayer = ({ setNextTrack, handleRandomSong, source }) => {
+const ModalMusicPlayer = ({ currentSong, handleRandomSong, source }) => {
   const songPlayerRef = useRef(null);
   const progressBarRef = useRef(null);
   const playPauseBtnRef = useRef(null);
@@ -37,28 +37,30 @@ const ModalMusicPlayer = ({ setNextTrack, handleRandomSong, source }) => {
   };
 
   return (
-    <>
-      <section className="flex flex-1 items-center px-7 py-3 w-full max-w-[1096px] rounded-2xl backdrop-blur-sm bg-gray-900/50 mx-auto">
-        <PlaybackControls
-          handleRandomSong={handleRandomSong}
-          isPlaying={isPlaying}
-          handleSongControl={playPause}
-          playPauseBtnRef={playPauseBtnRef}
-          margin="mx-4"
+    <section className="flex flex-1 items-center px-7 py-3 w-full max-w-[1096px] rounded-2xl backdrop-blur-sm bg-gray-900/50 mx-auto">
+      <PlaybackControls
+        handleRandomSong={handleRandomSong}
+        isPlaying={isPlaying}
+        handleSongControl={playPause}
+        playPauseBtnRef={playPauseBtnRef}
+        margin="mx-4"
+      />
+      {currentSong && (
+        <MusicDetails
+          songPhoto={currentSong.data.user.profile_picture['150x150']}
+          songName={currentSong.data.title.split('(')[0]}
+          singerName={currentSong.data.user.name}
         />
-
-        <MusicDetails songPhoto="" songName="" singerName="" />
-
-        {source && (
-          <MusicControls
-            setIsPlaying={setIsPlaying}
-            progressBarRef={progressBarRef}
-            songPlayerRef={songPlayerRef}
-            source={source}
-          />
-        )}
-      </section>
-    </>
+      )}
+      {source && (
+        <MusicControls
+          setIsPlaying={setIsPlaying}
+          progressBarRef={progressBarRef}
+          songPlayerRef={songPlayerRef}
+          source={source}
+        />
+      )}
+    </section>
   );
 };
 
