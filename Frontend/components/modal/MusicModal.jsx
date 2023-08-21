@@ -1,9 +1,61 @@
+'use client';
+
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
+
+import useAudius from '@/hooks/useAudius';
 import { ModalMusicPlayer } from '../MusicPlayer';
 
-const MusicModal = ({ songName, singerName, photo }) => {
+const MusicModal = ({ songId, songName, singerName, photo }) => {
+  const [songUrl, setSongUrl] = useState(null);
+  const [nextTrack, setNextTrack] = useState(false);
+  const { getTrack } = useAudius();
+
+  const tracks = [
+    'NVr0JYw',
+    'gvKmE7p',
+    'OW22Q44',
+    'qv96w2',
+    'ZOpqGxQ',
+    'o4m9r8v',
+    'o4Kdb0R',
+    'q52kbPm',
+    '9pw6jAA',
+    'NoYPQb7',
+    'WYPMdWo',
+    'bmgAOgb',
+    'RR59ZAQ',
+    'Nk4w9M0',
+    'dEJ0KA2',
+    'zVwwmdO',
+    'BZGzQYJ',
+    'W00gY39',
+    'zbkAaZw',
+    'VEQ17xN',
+  ];
+
+  const handleRandomSong = () => {
+    const randomSong = Math.floor(Math.random() * tracks.length);
+
+    setNextTrack(tracks[randomSong]);
+  };
+
+  useEffect(() => {
+    fetch(
+      'https://blockchange-audius-discovery-03.bdnodes.net/v1/tracks/D7KyD/stream?app_name=EXAMPLEAPP'
+    ).then((res) => {
+      setSongUrl(res.url);
+    });
+  }, []);
+
+  useEffect(() => {
+    getTrack(nextTrack).then((res) => {
+      console.log(res.data);
+    });
+  }, [nextTrack]);
+
   return (
-    <section className="z-[90] w-full max-w-[1200px] overflow-hidden h-screen rounded-tl-3xl rounded-bl-3xl relative">
+    <section className="z-[100] w-full max-w-[1200px] overflow-hidden h-screen rounded-tl-3xl rounded-bl-3xl bg-[#1c1c1c] absolute right-0">
       <Image
         src="/modal/back-arrow.svg"
         width={18}
@@ -42,7 +94,10 @@ const MusicModal = ({ songName, singerName, photo }) => {
       </div>
 
       <div className="absolute bottom-14 left-1/2 -translate-x-1/2 w-full z-10 prevent-select">
-        <ModalMusicPlayer />
+        <ModalMusicPlayer
+          handleRandomSong={handleRandomSong}
+          source={songUrl}
+        />
       </div>
 
       <Image

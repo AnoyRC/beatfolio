@@ -6,14 +6,28 @@ import PlayerMenu from './PlayerMenu';
 import Like from '../ui/Like';
 import Volume from './Volume';
 
-const MusicControls = ({ isLiked, endTime, maxWidth }) => {
+const MusicControls = ({
+  setIsPlaying,
+  songPlayerRef,
+  progressBarRef,
+  isLiked,
+  maxWidth,
+  source,
+}) => {
   const [isInPlaylist, setIsInPlaylist] = useState(false);
-
   return (
     <div className="flex flex-1">
       <Like liked={isLiked} />
 
-      <MusicProgressBar endTime={endTime} maxWidth={maxWidth} />
+      <audio ref={songPlayerRef}>
+        <source src={source} type="audio/mpeg" />
+      </audio>
+      <MusicProgressBar
+        setIsPlaying={setIsPlaying}
+        songPlayerRef={songPlayerRef}
+        progressBarRef={progressBarRef}
+        maxWidth={maxWidth}
+      />
 
       <div className="flex">
         <Volume />

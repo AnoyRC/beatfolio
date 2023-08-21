@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 28, 28, 28;
@@ -26,7 +28,25 @@ pre {
   word-wrap: break-word;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+.progress {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.progress::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #fff;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.progress::-webkit-slider-thumb:hover {
+  background: #aaa;
+}
 
 .textarea-color:-moz-placeholder,
 .textarea-color::-moz-placeholder,

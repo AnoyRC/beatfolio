@@ -1,21 +1,63 @@
-const MusicProgressBar = ({ maxWidth, endTime }) => {
+'use client';
+
+import { useEffect, useState } from 'react';
+
+const MusicProgressBar = ({
+  setIsPlaying,
+  songPlayerRef,
+  progressBarRef,
+  maxWidth,
+}) => {
+  const [progressValue, setProgressValue] = useState(0);
+  const [endTime, setEndTime] = useState(0);
+
+  useEffect(() => {
+    if (songPlayerRef.current.play) {
+      setInterval(() => {
+        setProgressValue(songPlayerRef.current.currentTime);
+        setEndTime(songPlayerRef.current.duration);
+      }, 1000);
+    }
+  }, [songPlayerRef]);
+
   return (
     <div className="flex items-center w-full mx-10">
-      <p className="text-gray-700">0:00</p>
+      <p className="text-gray-700">
+        {progressValue < 10
+          ? `0:0${Math.floor(progressValue)}`
+          : progressValue < 60
+          ? `0:${Math.floor(progressValue)}`
+          : `${Math.floor(progressValue / 60)}:${
+              Math.floor(progressValue % 60) < 10
+                ? `0${Math.floor(progressValue % 60)}`
+                : Math.floor(progressValue % 60)
+            }`}
+      </p>
 
-      <div
-        className={`h-[5px] w-full rounded-full overflow-hidden relative mx-3 ${
+      <input
+        type="range"
+        ref={progressBarRef}
+        value={progressValue}
+        onChange={(e) => {
+          songPlayerRef.current.play();
+          setIsPlaying(true);
+          songPlayerRef.current.currentTime = Math.floor(e.target.value);
+        }}
+        max={endTime ? endTime : '0:00'}
+        className={`progress w-full h-1 bg-gray-500 rounded-full cursor-pointer mx-3 ${
           maxWidth ? maxWidth : ''
         }`}
-      >
-        <div className={`bg-gray-700 w-full h-full`}></div>
-        <div
-          style={{ width: '0px' }}
-          className="h-full bg-white z-10 rounded-full absolute top-0 left-0"
-        ></div>
-      </div>
+      />
 
-      <p className="text-gray-700">{endTime ? endTime : '0:00'}</p>
+      <p className="text-gray-700">
+        {endTime
+          ? `${Math.floor(endTime / 60)}:${
+              Math.floor(endTime % 60) < 10
+                ? `0${Math.floor(endTime % 60)}`
+                : Math.floor(endTime % 60)
+            }`
+          : '0:00'}
+      </p>
     </div>
   );
 };

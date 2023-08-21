@@ -13,33 +13,23 @@ export default function Page() {
   const [undergroundTracks, setUndergroundTracks] = useState([]);
   const [playlists, setPlaylists] = useState([]);
 
-  const { getUndergroundTracks, getPlaylist } = useAudius();
-
-  // const playlistsId = ['DOPRl', '5123bEX', 'DE02J', '9OPRkgM'];
+  const { getUndergroundTracks, getTrendingPlaylist } = useAudius();
 
   useLayoutEffect(() => {
     getUndergroundTracks().then((res) => {
       setUndergroundTracks(res.data);
     });
+
+    getTrendingPlaylist().then((res) => {
+      setPlaylists(res.data);
+    });
   }, []);
-
-  // useEffect(() => {
-  //   if (playlistsId) {
-  //     const tempPlaylists = playlistsId.map((playlistId) => {
-  //       return getPlaylist(playlistId);
-  //     });
-
-  //     Promise.all(tempPlaylists).then((res) => {
-  //       setPlaylists(res);
-  //     });
-  //   }
-  // }, []);
 
   const data = [
     {
       label: 'Playlists',
       value: 'playlists',
-      jsx: <PlaylistLists playlists={playlists} />,
+      jsx: <PlaylistLists playlists={playlists.slice(7, 11)} />,
     },
     {
       label: 'Tracks',
@@ -89,7 +79,9 @@ export default function Page() {
       />
 
       <PlaylistContainer />
-      <UnderlineTabs data={data} value="playlists" margin="mb-28" />
+      {playlists && undergroundTracks && (
+        <UnderlineTabs data={data} value="tracks" margin="mb-28" />
+      )}
     </section>
   );
 }
