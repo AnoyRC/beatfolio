@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { useDispatch } from 'react-redux';
+import Image from "next/image";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useDispatch } from "react-redux";
 
-import { removeUser } from '@/redux/currentUserSlice';
+import { removeUser } from "@/redux/currentUserSlice";
 
-import { Tooltip } from '@material-tailwind/react';
+import { Tooltip } from "@material-tailwind/react";
+import { disconnectWallets } from "@/redux/modalSlice";
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const Logout = () => {
 
   const disconnectWallet = () => {
     dispatch(removeUser());
+    dispatch(disconnectWallets());
     disconnect();
   };
 
@@ -24,7 +26,7 @@ const Logout = () => {
       disabled={connected ? false : true}
     >
       <Tooltip
-        content={'Log Out'}
+        content={"Log Out"}
         placement="right"
         animate={{
           mount: { scale: 1, x: 10 },
