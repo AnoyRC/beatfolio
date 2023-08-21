@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Image from "next/image";
-import axios from "axios";
-import { Card, Input, Button, Textarea } from "@material-tailwind/react";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { useDispatch, useSelector } from "react-redux";
-import { closeUploadModal } from "@/redux/modalSlice";
+import { useState } from 'react';
+import Image from 'next/image';
+import { Card, Input, Button, Textarea } from '@material-tailwind/react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeUploadModal } from '@/redux/modalSlice';
 
-import useCrossmint from "@/hooks/useCrossmint";
-import { saveSongToIPFS, saveProfileToIPFS } from "@/hooks/saveToIPFS";
+import useCrossmint from '@/hooks/useCrossmint';
+import { saveSongToIPFS, saveProfileToIPFS } from '@/hooks/saveToIPFS';
+import { set } from 'date-fns';
 
 export default function AddSongModal() {
   const isOpen = useSelector((state) => state.modalSlice.isUploadOpen);
   const dispatch = useDispatch();
 
-  const [songTitle, setSongTitle] = useState("");
-  const [songGenre, setSongGenre] = useState("");
-  const [songMood, setSongMood] = useState("");
+  const [songTitle, setSongTitle] = useState('');
+  const [songGenre, setSongGenre] = useState('');
+  const [songMood, setSongMood] = useState('');
+  const [isLoading, setIsLoading] = useState('');
   const { publicKey } = useWallet();
 
   const { mintSong } = useCrossmint();
-  const { fetchUser } = useCrossmint();
 
   // const { publicKey } = useWallet();
   // const currentUser = fetchUser(publicKey.toString());
@@ -33,13 +33,13 @@ export default function AddSongModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const image = await saveProfileToIPFS(e.target[0].files[0]);
       const song = await saveSongToIPFS(e.target[1].files[0]);
-
       const res = await mintSong(
         {
           name: songTitle,
-          description: "A song uploaded on Beatfolio",
+          description: 'A song uploaded on Beatfolio',
           image: image,
           songLink: song,
           genre: songGenre,
@@ -47,12 +47,13 @@ export default function AddSongModal() {
         },
         publicKey
       );
+      setIsLoading(false);
 
-      console.log(res);
       if (res) {
         dispatch(closeUploadModal());
       }
     } catch (e) {
+      setIsLoading(false);
       console.log(e);
     }
   };
@@ -128,9 +129,15 @@ export default function AddSongModal() {
               />
             </div>
 
-            <Button className="mt-6 btn-gradiant" fullWidth type="submit">
-              Upload
-            </Button>
+            {isLoading ? (
+              <Button className="mt-6 btn-gradiant" fullWidth type="submit">
+                Loading...
+              </Button>
+            ) : (
+              <Button className="mt-6 btn-gradiant" fullWidth type="submit">
+                Upload
+              </Button>
+            )}
           </form>
         </Card>
       </>

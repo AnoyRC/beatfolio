@@ -3,22 +3,20 @@
 import { useEffect, useState } from 'react';
 
 const MusicProgressBar = ({
+  isPLaying,
+  endTime,
   setIsPlaying,
   songPlayerRef,
   progressBarRef,
   maxWidth,
 }) => {
   const [progressValue, setProgressValue] = useState(0);
-  const [endTime, setEndTime] = useState(0);
 
-  useEffect(() => {
-    if (songPlayerRef.current.play) {
-      // setInterval(() => {
-      //   setProgressValue(songPlayerRef.current?.currentTime);
-      //   setEndTime(songPlayerRef.current?.duration);
-      // }, 1000);
+  setInterval(() => {
+    if (isPLaying) {
+      setProgressValue(progressValue + 1);
     }
-  }, []);
+  }, 1000);
 
   return (
     <div className="flex items-center w-full mx-10">
@@ -41,6 +39,7 @@ const MusicProgressBar = ({
         onChange={(e) => {
           songPlayerRef.current.play();
           setIsPlaying(true);
+          setProgressValue(Math.floor(e.target.value));
           songPlayerRef.current.currentTime = Math.floor(e.target.value);
         }}
         max={endTime ? endTime : '0:00'}

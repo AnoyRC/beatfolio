@@ -13,14 +13,14 @@ export default function Page() {
     currentUser && (
       <section>
         <ProfileHero
-          coverImage={'"/song-photos/song-photo-2.png"'}
+          coverImage={'/song-photos/song-photo-2.png'}
           profileImage={currentUser.metadata.image}
         />
         <ProfileBio
           userName={currentUser.metadata.name}
           userBio={currentUser.metadata.description}
         />
-        <Web2ProfileTabs id={currentUser.id} />
+        <Web2ProfileTabs id={currentUser.id} name={currentUser.metadata.name} />
       </section>
     )
   );

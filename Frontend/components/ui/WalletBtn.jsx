@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import axios from "axios";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import axios from 'axios';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import useCrossmint from "@/hooks/useCrossmint";
+import useCrossmint from '@/hooks/useCrossmint';
 
-import { updatePublicKey, updateUser } from "@/redux/currentUserSlice";
+import { updatePublicKey, updateUser } from '@/redux/currentUserSlice';
 
-import Avatar from "../profile/Avatar";
-import { connectWallet, openSignupModal } from "@/redux/modalSlice";
-import { fetchUser } from "@/redux/crossmintSlice";
-import SignUp from "../layout/home/SignUp";
+import Avatar from '../profile/Avatar';
+import { connectWallet, openSignupModal } from '@/redux/modalSlice';
+import { fetchUser } from '@/redux/crossmintSlice';
+import SignUp from '../layout/home/SignUp';
 
 const WalletBtn = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const WalletBtn = () => {
     const signature = await SignMessage();
     try {
       const res = await axios.post(
-        "https://beatfolio.dotcombackend.me/api/auth",
+        'https://beatfolio.dotcombackend.me/api/auth',
         {
           address: publicKey,
           signature,
@@ -42,20 +42,16 @@ const WalletBtn = () => {
       );
 
       if (res) {
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem('token', res.data.token);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
-
   const WalletMultiButtonDynamic = dynamic(
     async () =>
-      (await import("@solana/wallet-adapter-react-ui")).WalletMultiButton,
+      (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
     { ssr: false }
   );
 
