@@ -12,80 +12,93 @@ const initialState = {
 };
 
 export const fetchUser = createAsyncThunk(
-  "user/fetchUser",
+  "crossmint/fetchUser",
   async (publicKey) => {
-    await axios
-      .get(
+    try {
+      const res = await axios.get(
         `https://beatfolio.dotcombackend.me/api/crossmint/fetch/user/${publicKey}`
-      )
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        return err;
-      });
+      );
+      return res.data;
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 );
 
-export const fetchSong = createAsyncThunk("song/fetchSong", async (id) => {
-  await axios
-    .get(`https://beatfolio.dotcombackend.me/api/crossmint/fetch/song/${id}`)
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) => {
-      return err;
-    });
+export const fetchSong = createAsyncThunk("crossmint/fetchSong", async (id) => {
+  try {
+    try {
+      const audiusRes = await axios.get(
+        `https://audius-metadata-4.figment.io/v1/tracks/${id}?app_name=EXAMPLEAPP`
+      );
+
+      return audiusRes.data;
+    } catch (err) {
+      console.log(err);
+    }
+
+    const res = await axios.get(
+      `https://beatfolio.dotcombackend.me/api/crossmint/fetch/song/${id}`
+    );
+
+    return res.data;
+  } catch (err) {
+    throw new Error(err);
+  }
 });
 
 export const fetchAllUsers = createAsyncThunk(
-  "user/fetchAllUsers",
+  "crossmint/fetchAllUsers",
   async () => {
-    await axios
-      .get("https://beatfolio.dotcombackend.me/api/crossmint/user/all")
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        return err;
-      });
+    try {
+      const res = await axios.get(
+        "https://beatfolio.dotcombackend.me/api/crossmint/user/all"
+      );
+
+      return res;
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 );
 
 export const fetchAllSongs = createAsyncThunk(
-  "song/fetchAllSongs",
+  "crossmint/fetchAllSongs",
   async () => {
-    await axios
-      .get("https://beatfolio.dotcombackend.me/api/crossmint/song/all")
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        return err;
-      });
+    try {
+      const res = await axios.get(
+        "https://beatfolio.dotcombackend.me/api/crossmint/song/all"
+      );
+
+      return res;
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 );
 
 export const fetchUserSongs = createAsyncThunk(
-  "song/fetchUserSongs",
+  "crossmint/fetchUserSongs",
   async (publicKey) => {
-    await axios
-      .get(
+    try {
+      const res = await axios.get(
         `https://beatfolio.dotcombackend.me/api/crossmint/song/user/${publicKey}`
-      )
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        return err;
-      });
+      );
+      return res;
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 );
 
 export const crossmintSlice = createSlice({
   name: "crossmint",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentUser: (state, action) => {
+      state.currentUser = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.pending, (state) => {
@@ -147,3 +160,5 @@ export const crossmintSlice = createSlice({
 });
 
 export default crossmintSlice.reducer;
+
+export const { setCurrentUser } = crossmintSlice.actions;

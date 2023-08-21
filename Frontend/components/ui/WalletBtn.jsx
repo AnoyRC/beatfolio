@@ -1,88 +1,79 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
-import axios from 'axios';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import axios from "axios";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useDispatch, useSelector } from "react-redux";
 
-import useCrossmint from '@/hooks/useCrossmint';
+import useCrossmint from "@/hooks/useCrossmint";
 
-import { updatePublicKey, updateUser } from '@/redux/currentUserSlice';
+import { updatePublicKey, updateUser } from "@/redux/currentUserSlice";
 
-import Avatar from '../profile/Avatar';
-import { openSignupModal } from '@/redux/modalSlice';
+import Avatar from "../profile/Avatar";
+import { connectWallet, openSignupModal } from "@/redux/modalSlice";
+import { fetchUser } from "@/redux/crossmintSlice";
+import SignUp from "../layout/home/SignUp";
 
 const WalletBtn = () => {
   const dispatch = useDispatch();
   const { connected, publicKey } = useWallet();
   const { SignMessage } = useCrossmint();
-  const [currentUser, setCurrentUser] = useState();
+  const currentUser = useSelector((state) => state.crossmint.currentUser);
+  const isConnected = useSelector((state) => state.modalSlice.isConnected);
 
-  const getUser = async (publicKey) => {
-    const { data } = await axios.get(
-      `http://localhost:8081/api/crossmint/fetch/user/${publicKey}`
-    );
-    // console.log(data);
-    setCurrentUser(data);
-    // console.log(currentUser);
-  };
+  useEffect(() => {
+    if (!publicKey) return;
+    dispatch(fetchUser(publicKey));
+    if (isConnected) return;
+    handleAuth();
+    dispatch(connectWallet());
+  }, [connected]);
 
-  const handleSignup = async () => {
-    getUser(publicKey);
+  const handleAuth = async () => {
     const signature = await SignMessage();
+    try {
+      const res = await axios.post(
+        "https://beatfolio.dotcombackend.me/api/auth",
+        {
+          address: publicKey,
+          signature,
+        }
+      );
 
-    if (!currentUser) {
-      dispatch(openSignupModal());
-    } else {
-      // console.log('user already exists');
+      if (res) {
+        localStorage.setItem("token", res.data.token);
+      }
+    } catch (err) {
+      console.log(err);
     }
-
-    await axios.post('http://localhost:8081/api/auth', {
-      signature: signature,
-      address: publicKey.toString(),
-    });
   };
 
   useEffect(() => {
-    if (publicKey) {
-      dispatch(updatePublicKey(publicKey.toString()));
-    }
-
-    if (currentUser) {
-      dispatch(
-        updateUser({
-          name: currentUser.metadata.name,
-          description: currentUser.metadata.description,
-          image: currentUser.metadata.image,
-        })
-      );
-    }
-
-    // console.log(currentUser);
-  }, [publicKey, currentUser]);
+    console.log(currentUser);
+  }, [currentUser]);
 
   const WalletMultiButtonDynamic = dynamic(
     async () =>
-      (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
+      (await import("@solana/wallet-adapter-react-ui")).WalletMultiButton,
     { ssr: false }
   );
 
   return (
     <>
       {connected ? (
-        <>
+        currentUser ? (
+          <Avatar profilePhoto={""} name={currentUser.metadata.name} />
+        ) : (
           <button
             className="px-6 py-3 btn-gradiant rounded-lg cursor-pointer font-bold hover:scale-105 active:scale-95 transition-transform duration-150"
-            onClick={handleSignup}
+            onClick={() => dispatch(openSignupModal())}
           >
             Sign Up
           </button>
-        </>
+        )
       ) : (
-        <>
-          <WalletMultiButtonDynamic />
-        </>
+        <WalletMultiButtonDynamic />
       )}
     </>
   );

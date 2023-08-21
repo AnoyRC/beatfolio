@@ -1,22 +1,27 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { Card, Input, Button, Textarea } from '@material-tailwind/react';
+import { useRef, useState } from "react";
+import { Card, Input, Button, Textarea } from "@material-tailwind/react";
 
-import useCrossmint from '@/hooks/useCrossmint';
-import { saveProfileToIPFS } from '@/hooks/saveToIPFS';
-import { useDispatch, useSelector } from 'react-redux';
+import useCrossmint from "@/hooks/useCrossmint";
+import { saveProfileToIPFS } from "@/hooks/saveToIPFS";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentUser } from "@/redux/crossmintSlice";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { closeSignupModal } from "@/redux/modalSlice";
+import { useRouter } from "next/navigation";
 
 export default function SimpleRegistrationForm() {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
-  const [bio, setBio] = useState('');
+  const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
 
+  const router = useRouter();
   const { mintUser } = useCrossmint();
 
   const isOpen = useSelector((state) => state.modalSlice.isSignupOpen);
-  const publicKey = useSelector((state) => state.currentUserSlice.publicKey);
+  const { publicKey, connected } = useWallet();
 
   const [isAnimating, setIsAnimating] = useState(false);
   const modalRef = useRef(null);
@@ -24,28 +29,38 @@ export default function SimpleRegistrationForm() {
   const handleModal = () => {
     setIsAnimating(true);
 
-    modalRef.current.classList.add('animate-growAndShrink');
+    modalRef.current.classList.add("animate-growAndShrink");
     setTimeout(() => {
       setIsAnimating(false);
-      modalRef.current.classList.remove('animate-growAndShrink');
+      modalRef.current.classList.remove("animate-growAndShrink");
     }, 500);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!connected) return;
+    try {
+      const image = await saveProfileToIPFS(e.target[0].files[0]);
 
-    const image = await saveProfileToIPFS(e.target[0].files[0]);
+      const res = await mintUser({ name, description: bio, image }, publicKey);
 
-    // const userData = await mintUser(
-    //   {
-    //     name,
-    //     description: bio,
-    //     image,
-    //   },
-    //   publicKey.toString()
-    // );
-
-    // if (userData) dispatch(closeSignupModal());
+      if (res) {
+        dispatch(
+          setCurrentUser({
+            id: publicKey,
+            metadata: {
+              name,
+              description: bio,
+              image: `https://${image}.ipfs.w3s.link`,
+            },
+          })
+        );
+        dispatch(closeSignupModal());
+        router.push("/users/home");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -61,7 +76,7 @@ export default function SimpleRegistrationForm() {
           ref={modalRef}
           shadow={true}
           className={`p-5 w-fit fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[99] ${
-            isAnimating ? 'animate-growAndShrink' : ''
+            isAnimating ? "animate-growAndShrink" : ""
           }`}
         >
           <h3 className="text-white text-2xl font-bold">Sign Up</h3>

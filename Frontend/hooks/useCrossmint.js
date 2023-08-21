@@ -1,17 +1,17 @@
-import { useWallet } from '@solana/wallet-adapter-react';
-import axios from 'axios';
-import bs58 from 'bs58';
+import { useWallet } from "@solana/wallet-adapter-react";
+import axios from "axios";
+import bs58 from "bs58";
 
 export default function useCrossmint() {
   const { signMessage } = useWallet();
 
   const mintUser = async (user, publicKey) => {
-    const body = JSON.stringify({
+    const body = {
       name: user.name,
       description: user.description,
       image: `https://${user.image}.ipfs.w3s.link`,
       address: publicKey,
-    });
+    };
 
     const res = await axios
       .post(`https://beatfolio.dotcombackend.me/api/crossmint/mint/user`, body)
@@ -71,7 +71,7 @@ export default function useCrossmint() {
   const SignMessage = async () => {
     const signedMessage = await signMessage(
       new TextEncoder().encode(
-        'Welcome to BeatFolio. Please Sign the message to continue.'
+        "Welcome to BeatFolio. Please Sign the message to continue."
       )
     );
 

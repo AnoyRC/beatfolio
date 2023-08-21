@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { useDispatch } from 'react-redux';
-import { openUploadModal } from '@/redux/modalSlice';
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { useDispatch } from "react-redux";
+import { disconnectWallets, openUploadModal } from "@/redux/modalSlice";
 
 import {
   Avatar as AvatarComponent,
@@ -12,7 +12,8 @@ import {
   MenuHandler,
   MenuList,
   MenuItem,
-} from '@material-tailwind/react';
+} from "@material-tailwind/react";
+import { removeUser } from "@/redux/currentUserSlice";
 
 const Avatar = ({ profilePhoto, name }) => {
   const router = useRouter();
@@ -20,6 +21,8 @@ const Avatar = ({ profilePhoto, name }) => {
   const { disconnect } = useWallet();
 
   const disconnectWallet = () => {
+    dispatch(removeUser());
+    dispatch(disconnectWallets());
     disconnect();
   };
 
@@ -43,7 +46,7 @@ const Avatar = ({ profilePhoto, name }) => {
             className="border border-purple-500 shadow-xl shadow-purple-900/20 ring-4 ring-purple-500/30"
           />
           <p className="text-white font-normal text-xl">
-            {name ? name : 'Username'}
+            {name ? name : "Username"}
           </p>
         </div>
       </MenuHandler>
@@ -51,10 +54,10 @@ const Avatar = ({ profilePhoto, name }) => {
       <MenuList className="bg-gray-900">
         <MenuItem
           className="flex items-center text-white hover:bg-gray-50/5 hover:text-white hover:font-bold"
-          onClick={() => router.push('/users/profile')}
+          onClick={() => router.push("/users/profile")}
         >
           <Image
-            src={'/profile/profile-icon.svg'}
+            src={"/profile/profile-icon.svg"}
             width={20}
             height={20}
             alt=""
@@ -68,7 +71,7 @@ const Avatar = ({ profilePhoto, name }) => {
           onClick={() => dispatch(openUploadModal())}
         >
           <Image
-            src={'/profile/upload.svg'}
+            src={"/profile/upload.svg"}
             width={20}
             height={20}
             alt=""
