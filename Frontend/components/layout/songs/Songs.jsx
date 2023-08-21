@@ -2,7 +2,6 @@ import SongItem from './SongItem';
 import Link from 'next/link';
 
 const Songs = ({ heading, url, songs }) => {
-  console.log(songs);
   return (
     <section className="mb-16">
       <div className="flex justify-between items-start">

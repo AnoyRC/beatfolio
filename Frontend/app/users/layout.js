@@ -521,7 +521,9 @@ export default function UsersLayout({ children }) {
           </section>
 
           <aside className="col-span-3 px-2 overflow-y-auto no-scrollbar no-scrollbar::-webkit-scrollbar">
-            <Songs heading="New Releases" url={null} songs={newReleases} />
+            {newReleases && (
+              <Songs heading="New Releases" url={null} songs={newReleases} />
+            )}
             {topReleases && (
               <Songs heading="Top Releases" url="/feeds" songs={topReleases} />
             )}

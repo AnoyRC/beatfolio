@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
-const ProfileHero = ({ profileImage }) => {
+const ProfileHero = ({ coverImage, profileImage }) => {
   return (
     <section>
       <div className="bg-gray-300 h-44 relative">
         <Image
-          src="/song-photos/song-photo-2.png"
+          src={coverImage && coverImage}
           fill
           alt="Cover Image"
           objectFit="cover"

@@ -1,4 +1,8 @@
+'use client';
+
 import Image from 'next/image';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 import PlayBtn from '../../ui/PlayBtn';
 import FeedDetails from './FeedDetails';
@@ -15,6 +19,10 @@ const Feed = ({
   singer,
   number,
 }) => {
+  const handleSongControl = () => {
+    console.log('sand');
+  };
+
   return (
     <div
       className={`h-[50vh] w-full relative ${
@@ -28,7 +36,6 @@ const Feed = ({
         alt="Song Profle"
         className="opacity-70"
       />
-
       <div className="flex justify-between items-center px-6 py-9">
         <FeedDetails
           id={singer.id}
@@ -50,7 +57,18 @@ const Feed = ({
         </div>
       </div>
 
-      <PlayBtn style="bg-white/20 border-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hover:opacity-80" />
+      <button
+        className={`p-3 border rounded-full bg-white/20 border-white absolute top-1/2 left-1/2 -translate-x-1/2
+      -translate-y-1/2 hover:opacity-80`}
+        onClick={handleSongControl}
+      >
+        <Image
+          src="/music-player/play.svg"
+          width={28}
+          height={28}
+          alt="play button"
+        />
+      </button>
     </div>
   );
 };

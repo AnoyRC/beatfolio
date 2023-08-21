@@ -1,8 +1,12 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
-const SongDetails = ({ singerImage, songName, singerName, genre }) => {
+const SongDetails = ({ id, singerImage, songName, singerName, genre }) => {
   return (
-    <div className="flex items-center gap-4 z-10 cursor-pointer hover:bg-gray-900/50 rounded-lg py-2 px-4">
+    <Link
+      className="flex items-center gap-4 z-10 cursor-pointer hover:bg-gray-900/50 rounded-lg py-2 px-4"
+      href={`/users/profile/${id}`}
+    >
       <Image
         src={singerImage ? singerImage : '/profile/profile-image.png'}
         alt="Singer Image"
@@ -24,7 +28,7 @@ const SongDetails = ({ singerImage, songName, singerName, genre }) => {
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

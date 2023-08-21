@@ -7,17 +7,12 @@ import useAudius from '@/hooks/useAudius';
 
 const PlaylistContainer = () => {
   const [playlists, setPlaylists] = useState([]);
-  const [undergroundTracks, setUndergroundTracks] = useState([]);
 
-  const { getTrendingPlaylist, getUndergroundTracks } = useAudius();
+  const { getTrendingPlaylist } = useAudius();
 
   useLayoutEffect(() => {
     getTrendingPlaylist().then((res) => {
       setPlaylists(res.data.slice(0, 4));
-    });
-
-    getUndergroundTracks().then((res) => {
-      setUndergroundTracks(res.data);
     });
   }, []);
 

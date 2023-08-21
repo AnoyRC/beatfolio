@@ -47,6 +47,7 @@ const ModalMusicPlayer = ({ currentSong, handleRandomSong, source }) => {
       />
       {currentSong && (
         <MusicDetails
+          id={currentSong.data.user.id}
           songPhoto={currentSong.data.user.profile_picture['150x150']}
           songName={currentSong.data.title.split('(')[0]}
           singerName={currentSong.data.user.name}

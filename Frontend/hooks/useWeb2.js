@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default function useWeb2() {
   const SignInUser = async (publicKey, signature) => {
@@ -8,9 +8,9 @@ export default function useWeb2() {
     });
 
     axios
-      .post("https://dotcombackend/beatfolio/api/auth", body)
+      .post('https://beatfolio.dotcombackend.me/api/auth', body)
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
+        localStorage.setItem('token', res.data.token);
       })
       .catch((err) => {
         console.log(err);
@@ -20,13 +20,13 @@ export default function useWeb2() {
   const CheckLoggedUser = async (publicKey) => {
     const config = {
       headers: {
-        "x-auth-token": localStorage.token,
-        "x-address": publicKey,
+        'x-auth-token': localStorage.token,
+        'x-address': publicKey,
       },
     };
 
     axios
-      .get("https://dotcombackend/beatfolio/api/auth", config)
+      .get('https://beatfolio.dotcombackend.me/api/auth', config)
       .then((res) => {
         console.log(res.data);
       })
@@ -37,7 +37,9 @@ export default function useWeb2() {
 
   const getFollowers = async (publicKey) => {
     axios
-      .post(`https://dotcombackend/beatfolio/api/user/followers/${publicKey}`)
+      .post(
+        `https://beatfolio.dotcombackend.me/api/user/followers/${publicKey}`
+      )
       .then((res) => {
         return res.data;
       })
@@ -48,7 +50,7 @@ export default function useWeb2() {
 
   const getFollowing = async (publicKey) => {
     axios
-      .get(`https://dotcombackend/beatfolio/api/user/following/${publicKey}`)
+      .get(`https://beatfolio.dotcombackend.me/api/user/following/${publicKey}`)
       .then((res) => {
         console.log(res.data);
       })
@@ -60,14 +62,14 @@ export default function useWeb2() {
   const followUser = async (publicKey, address) => {
     const config = {
       headers: {
-        "x-auth-token": localStorage.token,
-        "x-address": publicKey,
+        'x-auth-token': localStorage.token,
+        'x-address': publicKey,
       },
     };
 
     axios
       .post(
-        `https://dotcombackend/beatfolio/api/user/follow/${address}`,
+        `https://beatfolio.dotcombackend.me/api/user/follow/${address}`,
         {},
         config
       )
@@ -82,14 +84,14 @@ export default function useWeb2() {
   const unfollowUser = async (publicKey, address) => {
     const config = {
       headers: {
-        "x-auth-token": localStorage.token,
-        "x-address": publicKey,
+        'x-auth-token': localStorage.token,
+        'x-address': publicKey,
       },
     };
 
     axios
       .post(
-        `https://dotcombackend/beatfolio/api/user/unfollow/${address}`,
+        `https://beatfolio.dotcombackend.me/api/user/unfollow/${address}`,
         {},
         config
       )
@@ -104,14 +106,14 @@ export default function useWeb2() {
   const likeSong = async (publicKey, songId) => {
     const config = {
       headers: {
-        "x-auth-token": localStorage.token,
-        "x-address": publicKey,
+        'x-auth-token': localStorage.token,
+        'x-address': publicKey,
       },
     };
 
     axios
       .post(
-        `https://dotcombackend/beatfolio/api/song/like/${songId}`,
+        `https://beatfolio.dotcombackend.me/api/song/like/${songId}`,
         {},
         config
       )
@@ -126,14 +128,14 @@ export default function useWeb2() {
   const unlikeSong = async (publicKey, songId) => {
     const config = {
       headers: {
-        "x-auth-token": localStorage.token,
-        "x-address": publicKey,
+        'x-auth-token': localStorage.token,
+        'x-address': publicKey,
       },
     };
 
     axios
       .post(
-        `https://dotcombackend/beatfolio/api/song/unlike/${songId}`,
+        `https://beatfolio.dotcombackend.me/api/song/unlike/${songId}`,
         {},
         config
       )
@@ -147,7 +149,7 @@ export default function useWeb2() {
 
   const getLikes = async (songId) => {
     axios
-      .get(`https://dotcombackend/beatfolio/api/song/likes/${songId}`)
+      .get(`https://beatfolio.dotcombackend.me/api/song/likes/${songId}`)
       .then((res) => {
         return res.data;
       })
@@ -159,8 +161,8 @@ export default function useWeb2() {
   const createPlaylist = async (publicKey, playlistName) => {
     const config = {
       headers: {
-        "x-auth-token": localStorage.token,
-        "x-address": publicKey,
+        'x-auth-token': localStorage.token,
+        'x-address': publicKey,
       },
     };
 
@@ -169,7 +171,11 @@ export default function useWeb2() {
     });
 
     axios
-      .post(`https://dotcombackend/beatfolio/api/playlist/create`, body, config)
+      .post(
+        `https://beatfolio.dotcombackend.me/api/playlist/create`,
+        body,
+        config
+      )
       .then((res) => {
         return res.data;
       })
@@ -180,7 +186,7 @@ export default function useWeb2() {
 
   const getPlaylist = async (playlistId) => {
     axios
-      .get(`https://dotcombackend/beatfolio/api/playlist/${playlistId}`)
+      .get(`https://beatfolio.dotcombackend.me/api/playlist/${playlistId}`)
       .then((res) => {
         return res.data;
       })
@@ -191,7 +197,7 @@ export default function useWeb2() {
 
   const getAllPlaylists = async () => {
     axios
-      .get(`https://dotcombackend/beatfolio/api/playlist/all`)
+      .get(`https://beatfolio.dotcombackend.me/api/playlist/all`)
       .then((res) => {
         return res.data;
       })
@@ -202,7 +208,7 @@ export default function useWeb2() {
 
   const getPlaylistByAddress = async (publicKey) => {
     axios
-      .get(`https://dotcombackend/beatfolio/api/playlist/${publicKey}`)
+      .get(`https://beatfolio.dotcombackend.me/api/playlist/${publicKey}`)
       .then((res) => {
         return res.data;
       })
@@ -214,14 +220,14 @@ export default function useWeb2() {
   const addSongToPlaylist = async (publicKey, playlistId, songId) => {
     const config = {
       headers: {
-        "x-auth-token": localStorage.token,
-        "x-address": publicKey,
+        'x-auth-token': localStorage.token,
+        'x-address': publicKey,
       },
     };
 
     axios
       .post(
-        `https://dotcombackend/beatfolio/api/playlist/add/${playlistId}/${songId}`,
+        `https://beatfolio.dotcombackend.me/api/playlist/add/${playlistId}/${songId}`,
         {},
         config
       )
@@ -236,14 +242,14 @@ export default function useWeb2() {
   const removeSongFromPlaylist = async (publicKey, playlistId, songId) => {
     const config = {
       headers: {
-        "x-auth-token": localStorage.token,
-        "x-address": publicKey,
+        'x-auth-token': localStorage.token,
+        'x-address': publicKey,
       },
     };
 
     axios
       .post(
-        `https://dotcombackend/beatfolio/api/playlist/remove/${playlistId}/${songId}`,
+        `https://beatfolio.dotcombackend.me/api/playlist/remove/${playlistId}/${songId}`,
         {},
         config
       )
@@ -257,7 +263,9 @@ export default function useWeb2() {
 
   const getSongsFromPlaylist = async (playlistId) => {
     axios
-      .get(`https://dotcombackend/beatfolio/api/playlist/songs/${playlistId}`)
+      .get(
+        `https://beatfolio.dotcombackend.me/api/playlist/songs/${playlistId}`
+      )
       .then((res) => {
         return res.data;
       })
