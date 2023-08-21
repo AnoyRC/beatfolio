@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import Image from "next/image";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import useAudius from '@/hooks/useAudius';
-import { ModalMusicPlayer } from '../MusicPlayer';
-import { closeMusicModal } from '@/redux/modalSlice';
+import useAudius from "@/hooks/useAudius";
+import { ModalMusicPlayer } from "../MusicPlayer";
+import { closeMusicModal, openMusicModal } from "@/redux/modalSlice";
+import { fetchSong } from "@/redux/crossmintSlice";
 
 const MusicModal = () => {
   const [songUrl, setSongUrl] = useState(null);
@@ -29,44 +30,27 @@ const MusicModal = () => {
   }, [songId, currentSong]);
 
   const tracks = [
-    'NVr0JYw',
-    'gvKmE7p',
-    'OW22Q44',
-    'qv96w2',
-    'ZOpqGxQ',
-    'o4m9r8v',
-    'o4Kdb0R',
-    'q52kbPm',
-    '9pw6jAA',
-    'NoYPQb7',
-    'WYPMdWo',
-    'bmgAOgb',
-    'RR59ZAQ',
-    'Nk4w9M0',
-    'dEJ0KA2',
-    'zVwwmdO',
-    'BZGzQYJ',
-    'W00gY39',
-    'zbkAaZw',
-    'VEQ17xN',
+    "NVr0JYw",
+    "gvKmE7p",
+    "OW22Q44",
+    "qv96w2",
+    "ZOpqGxQ",
+    "o4m9r8v",
+    "o4Kdb0R",
+    "q52kbPm",
+    "9pw6jAA",
+    "NoYPQb7",
+    "WYPMdWo",
+    "bmgAOgb",
+    "RR59ZAQ",
+    "Nk4w9M0",
+    "dEJ0KA2",
+    "zVwwmdO",
+    "BZGzQYJ",
+    "W00gY39",
+    "zbkAaZw",
+    "VEQ17xN",
   ];
-
-  const handleRandomSong = () => {
-    const randomSong = Math.floor(Math.random() * tracks.length);
-
-    setNextTrack(tracks[randomSong]);
-  };
-
-  useEffect(() => {
-    if (nextTrack)
-      getTrack(nextTrack).then((res) => {
-        console.log(res.data);
-      });
-  }, [nextTrack]);
-
-  const handleCloseMusicModal = () => {
-    dispatch(closeMusicModal());
-  };
 
   return (
     isOpen && (
@@ -77,17 +61,17 @@ const MusicModal = () => {
           height={18}
           alt="go back button"
           className="absolute top-8 left-8 z-10 cursor-pointer prevent-select"
-          onClick={handleCloseMusicModal}
+          onClick={() => dispatch(closeMusicModal())}
         />
 
         <div className="w-[450px] h-[450px] mx-auto mt-16 rounded overflow-hidden relative z-10">
           <div className="flex flex-col h-full justify-between p-4">
             <div className="text-black z-20 text-base p-1.5 border-black border-y-2 font-medium w-fit">
-              {currentSong ? currentSong.data.user.name : 'Singer Name'}
+              {currentSong ? currentSong.data.user.name : "Singer Name"}
             </div>
 
             <Image
-              src={currentSong ? currentSong.data.artwork['480x480'] : ''}
+              src={currentSong ? currentSong.data.artwork["480x480"] : ""}
               width={320}
               height={320}
               alt="Song profile"
@@ -95,9 +79,9 @@ const MusicModal = () => {
             />
 
             <div className="text-black z-20 text-base p-1.5 font-medium ml-auto text-right">
-              The{' '}
+              The{" "}
               <span className="block">
-                {currentSong ? currentSong.data.title : 'Track Name'}
+                {currentSong ? currentSong.data.title : "Track Name"}
               </span>
             </div>
           </div>
@@ -112,15 +96,11 @@ const MusicModal = () => {
         </div>
 
         <div className="absolute bottom-14 left-1/2 -translate-x-1/2 w-full z-10 prevent-select">
-          <ModalMusicPlayer
-            currentSong={currentSong}
-            handleRandomSong={handleRandomSong}
-            source={songUrl}
-          />
+          <ModalMusicPlayer currentSong={currentSong} source={songUrl} />
         </div>
 
         <Image
-          src={currentSong ? currentSong.data.artwork['1000x1000'] : ''}
+          src={currentSong ? currentSong.data.artwork["1000x1000"] : ""}
           fill
           content="cover"
           alt="Song profile"
