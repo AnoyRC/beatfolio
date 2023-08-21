@@ -4,6 +4,7 @@ import WalletsProvider from '@/provider/WalletsProvider';
 import ReduxProvider from '@/provider/ReduxProvider';
 import SignupModal from '@/components/modal/SignupModal';
 import AddSongModal from '@/components/modal/AddSongModal';
+import MusicModal from '@/components/modal/MusicModal';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -98,11 +99,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         className={
-          inter.className + ' h-screen overflow-hidden max-w-7xl mx-auto'
+          inter.className +
+          ' h-screen overflow-hidden max-w-7xl mx-auto relative'
         }
       >
         <ReduxProvider>
           <WalletsProvider>
+            <MusicModal />
             <SignupModal />
             <AddSongModal />
             {children}

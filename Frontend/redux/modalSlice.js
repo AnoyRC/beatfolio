@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isSignupOpen: false,
@@ -6,10 +6,12 @@ const initialState = {
   isAddPlaylistOpen: false,
   isAddToPlaylistOpen: false,
   isConnected: false,
+  isMusicModalOpen: false,
+  isAddSongOpen: false,
 };
 
 export const modalSlice = createSlice({
-  name: "modal",
+  name: 'modal',
   initialState,
   reducers: {
     openSignupModal: (state) => {
@@ -42,6 +44,18 @@ export const modalSlice = createSlice({
     disconnectWallets: (state) => {
       state.isConnected = false;
     },
+    openMusicModal: (state) => {
+      state.isMusicModalOpen = true;
+    },
+    closeMusicModal: (state) => {
+      state.isMusicModalOpen = false;
+    },
+    openAddSongModal: (state) => {
+      state.isAddSongOpen = true;
+    },
+    closeAddSongModal: (state) => {
+      state.isAddSongOpen = false;
+    },
   },
 });
 
@@ -52,8 +66,14 @@ export const {
   closeUploadModal,
   openAddPlaylistModal,
   closeAddPlaylistModal,
+  openAddToPlaylistModal,
+  closeAddToPlaylistModal,
   connectWallet,
   disconnectWallets,
+  openMusicModal,
+  closeMusicModal,
+  openAddSongModal,
+  closeAddSongModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

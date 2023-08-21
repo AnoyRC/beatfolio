@@ -13,12 +13,12 @@ const MusicProgressBar = ({
 
   useEffect(() => {
     if (songPlayerRef.current.play) {
-      setInterval(() => {
-        setProgressValue(songPlayerRef.current.currentTime);
-        setEndTime(songPlayerRef.current.duration);
-      }, 1000);
+      // setInterval(() => {
+      //   setProgressValue(songPlayerRef.current?.currentTime);
+      //   setEndTime(songPlayerRef.current?.duration);
+      // }, 1000);
     }
-  }, [songPlayerRef]);
+  }, []);
 
   return (
     <div className="flex items-center w-full mx-10">
